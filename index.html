@@ -645,7 +645,7 @@
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (canvas && hero) {
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
       renderer.setClearColor(0x000000, 0);
 
