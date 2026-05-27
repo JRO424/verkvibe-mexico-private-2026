@@ -12,8 +12,12 @@
       --cantera: #b55237;
       --maize: #e2ac3f;
       --azul: #23687d;
+      --turquesa: #1f9aa0;
+      --bugambilia: #be2f6b;
+      --cempasuchil: #f2a91f;
+      --lapis: #155a8a;
       --cacao: #4b3026;
-      --paper: #fbf4e7;
+      --paper: #fff3df;
       --paper-2: #fffaf1;
       --muted: #686f65;
       --line: rgba(23, 32, 29, .16);
@@ -25,8 +29,9 @@
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(90deg, rgba(181,82,55,.055) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(35,104,125,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(181,82,55,.07) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(31,154,160,.055) 1px, transparent 1px),
+        linear-gradient(135deg, rgba(242,169,31,.08), transparent 42%, rgba(190,47,107,.055)),
         var(--paper);
       background-size: 34px 34px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -65,7 +70,7 @@
       transition: transform .2s ease, background .2s ease;
     }
     .button:hover { transform: translateY(-2px); }
-    .button.primary { background: var(--cantera); color: #fffaf1; box-shadow: 0 18px 45px rgba(181, 82, 55, .24); }
+    .button.primary { background: linear-gradient(135deg, var(--cantera), var(--bugambilia)); color: #fffaf1; box-shadow: 0 18px 45px rgba(181, 82, 55, .28); }
     .button.secondary { border-color: rgba(251, 244, 231, .54); color: #fffaf1; background: rgba(251, 244, 231, .08); }
     .hero {
       color: #fffaf1;
@@ -169,6 +174,22 @@
       color: var(--cacao);
       line-height: 1.55;
     }
+    .heritage-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .heritage-strip span {
+      height: 10px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(23,32,29,.12);
+    }
+    .heritage-strip span:nth-child(1) { background: var(--nopal); }
+    .heritage-strip span:nth-child(2) { background: var(--cempasuchil); }
+    .heritage-strip span:nth-child(3) { background: var(--bugambilia); }
+    .heritage-strip span:nth-child(4) { background: var(--turquesa); }
+    .heritage-strip span:nth-child(5) { background: var(--cantera); }
     .texture-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -190,9 +211,9 @@
     .dark {
       color: #fffaf1;
       background:
-        linear-gradient(90deg, rgba(226,172,63,.1) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(251,244,231,.06) 1px, transparent 1px),
-        linear-gradient(135deg, #112725, #1d463d 56%, #4b3026);
+        linear-gradient(90deg, rgba(242,169,31,.12) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(31,154,160,.1) 1px, transparent 1px),
+        linear-gradient(135deg, #102722, #194b41 43%, #6e2b3e 72%, #4b3026);
       background-size: 30px 30px, 30px 30px, auto;
     }
     .section-head {
@@ -242,16 +263,29 @@
     }
     .rhythm b { display: block; color: var(--maize); }
     .rhythm p { margin: 7px 0 0; color: rgba(255,250,241,.72); font-size: 14px; line-height: 1.48; }
-    .areas { display: grid; gap: 20px; }
+    .landmark-section {
+      background:
+        linear-gradient(90deg, rgba(24,71,61,.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(242,169,31,.11) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,250,241,.72), rgba(255,243,223,.9));
+      background-size: 42px 42px, 42px 42px, auto;
+    }
+    .areas { display: grid; gap: 24px; }
     .area {
       display: grid;
       grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
       gap: 32px;
       align-items: start;
-      border-top: 1px solid var(--line);
-      padding: 32px 0;
+      border: 1px solid rgba(23,32,29,.12);
+      border-left: 7px solid var(--cantera);
+      border-radius: 8px;
+      padding: 24px;
+      background: rgba(255,250,241,.72);
+      box-shadow: 0 16px 44px rgba(17,39,37,.08);
     }
-    .area:last-child { border-bottom: 1px solid var(--line); }
+    .area:nth-child(2n) { border-left-color: var(--turquesa); }
+    .area:nth-child(3n) { border-left-color: var(--cempasuchil); }
+    .area:nth-child(4n) { border-left-color: var(--bugambilia); }
     .area:nth-child(even) { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); }
     .area:nth-child(even) .photo { order: 2; }
     .photo {
@@ -260,7 +294,11 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       background: #ddd;
-      border: 1px solid rgba(23,32,29,.08);
+      border: 5px solid #fffaf1;
+      outline: 1px solid rgba(23,32,29,.12);
+    }
+    .photo img {
+      filter: saturate(1.08) contrast(1.02);
     }
     .area-copy { padding: 6px 0 0; }
     .area-copy p { color: var(--muted); margin: 14px 0 0; }
@@ -274,7 +312,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 14px;
-      background: rgba(255,250,241,.78);
+      background: rgba(255,250,241,.84);
     }
     .detail b {
       display: block;
@@ -292,7 +330,7 @@
       color: var(--nopal);
       font-size: 12px;
       font-weight: 800;
-      background: #fffaf1;
+      background: linear-gradient(180deg, #fffaf1, #fff3df);
     }
     .included {
       display: grid;
@@ -407,6 +445,7 @@
               <p>Eight spots keeps the group nimble, warm, and able to move through the city without feeling like a bus tour.</p>
             </div>
           </div>
+          <div class="heritage-strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
           <div class="privacy"><strong>Private page note:</strong> this invitation page is intentionally unlisted and marked noindex. Please do not share it broadly.</div>
         </div>
       </div>
@@ -462,42 +501,74 @@
       </div>
     </section>
 
-    <section>
+    <section class="landmark-section">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Landmarks, neighborhoods, and table culture</p>
-            <h2>Real places. Real flavor. No generic travel gloss.</h2>
+            <p class="eyebrow">Landmark arc and table culture</p>
+            <h2>The city in full color: plazas, murals, canals, castles, and museums.</h2>
           </div>
-          <p>Each route pairs a known Mexico City landmark with the food and neighborhood life around it. The result is a trip that feels rooted in place instead of stitched together from tourist highlights.</p>
+          <p>Each route pairs a recognized Mexico City landmark with the food and neighborhood life around it. The page now follows a cleaner cultural arc: civic power, ancient roots, major artwork, living agriculture, parkland grandeur, contemporary design, and the meals that make it all feel human.</p>
         </div>
         <div class="areas">
           <article class="area">
-            <div class="photo"><img alt="Palacio de Bellas Artes near the Centro Historico food tour route" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Palacio_de_Bellas_Artes_and_Palacio_Postal_-_Mexico_2024.jpg"></div>
+            <div class="photo"><img alt="Palacio Nacional on the Zocalo in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Nacional_from_NE_corner_of_Zocalo%2C_Mexico_City.jpg"></div>
             <div class="area-copy">
-              <h3>Centro Historico</h3>
-              <p>Ancient, colonial, political, artistic, and culinary history layered into a few unforgettable blocks. The first full-day route will be adjusted around Revolution Day and venue hours, with Bellas Artes and the surrounding streets as a visual anchor.</p>
-              <p>Expect a mix of old-city architecture, classic sweets, market energy, coffee, and the dense sense that every corner has been used by somebody before you for ceremony, protest, lunch, work, or celebration.</p>
+              <h3>Zocalo and Palacio Nacional</h3>
+              <p>The Zocalo is the formal heart of the city, the vast civic plaza facing Palacio Nacional, where the president's offices are located. It is also one of the clearest places to feel the layers of Mexico City at once: Indigenous capital, colonial seat, modern republic, public ceremony, protest, and everyday movement.</p>
+              <p>The food route around Centro Historico should feel elevated and grounded at the same time: cathedral views, old portals, classic sweets, market energy, coffee, and the sense that every block has hosted power, labor, lunch, art, and celebration.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Palacio de Bellas Artes and nearby historic core</span></div>
-                <div class="detail"><b>Food lens</b><span>Markets, cantina-style bites, coffee, sweets, and street snacks</span></div>
-                <div class="detail"><b>Cultural note</b><span>Revolution Day may shape timing, route access, and civic energy</span></div>
+                <div class="detail"><b>Landmark</b><span>Zocalo, Palacio Nacional, Metropolitan Cathedral, and old-city portals</span></div>
+                <div class="detail"><b>Food lens</b><span>Classic sweets, cantina-style bites, market stops, coffee, and street snacks</span></div>
+                <div class="detail"><b>Cultural note</b><span>The plaza is civic, ceremonial, political, and deeply historic</span></div>
                 <div class="detail"><b>Pace</b><span>Walkable, layered, and best done with good shoes</span></div>
               </div>
-              <div class="chips"><span>Zocalo</span><span>Bellas Artes</span><span>Mercado de San Juan</span><span>Coffee and sweets</span></div>
+              <div class="chips"><span>Zocalo</span><span>Palacio Nacional</span><span>Cathedral</span><span>Centro sweets</span></div>
+            </div>
+          </article>
+
+          <article class="area">
+            <div class="photo"><img alt="Murals inside Palacio de Bellas Artes in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Murales_del_Palacio_de_Bellas_Artes.jpg"></div>
+            <div class="area-copy">
+              <h3>Bellas Artes and the mural tradition</h3>
+              <p>Palacio de Bellas Artes gives the trip a high-art center of gravity: marble, stained glass, Art Nouveau and Art Deco architecture, and monumental murals by the artists who helped define Mexico's visual language in the twentieth century.</p>
+              <p>This is where the page should shine: not with generic luxury, but with cultural richness. The route can pair the grandeur of Bellas Artes with nearby coffee, pastries, old-school dining rooms, and a refined pause before the next neighborhood opens up.</p>
+              <div class="area-details">
+                <div class="detail"><b>Landmark</b><span>Palacio de Bellas Artes, murals, Alameda Central, and Palacio Postal</span></div>
+                <div class="detail"><b>Food lens</b><span>Coffee, pastry, old Centro dining rooms, sweets, and market detours</span></div>
+                <div class="detail"><b>Art note</b><span>Monumental murals, marble interiors, theater, and national cultural prestige</span></div>
+                <div class="detail"><b>Pace</b><span>Polished, visual, and paced for looking closely</span></div>
+              </div>
+              <div class="chips"><span>Bellas Artes</span><span>Murals</span><span>Palacio Postal</span><span>Alameda</span></div>
+            </div>
+          </article>
+
+          <article class="area">
+            <div class="photo"><img alt="Templo Mayor ruins in the historic center of Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ruinas_del_Templo_Mayor_-_Centro_Hist%C3%B3rico_de_Ciudad_de_M%C3%A9xico.jpg"></div>
+            <div class="area-copy">
+              <h3>Templo Mayor and ancient Mexico-Tenochtitlan</h3>
+              <p>Just steps from the Zocalo, Templo Mayor changes the scale of the city. It makes clear that Mexico City is not simply colonial architecture and contemporary dining; it is built over the ceremonial center of Mexico-Tenochtitlan.</p>
+              <p>This section gives the tour more gravity. Food becomes part of continuity: maize, cacao, markets, chile, herbs, and the living ingredients that connect the ancient city to the modern table.</p>
+              <div class="area-details">
+                <div class="detail"><b>Landmark</b><span>Templo Mayor ruins and the ancient ceremonial core</span></div>
+                <div class="detail"><b>Food lens</b><span>Maize, cacao, chile, herbs, markets, and pre-Hispanic ingredients</span></div>
+                <div class="detail"><b>Cultural note</b><span>The old capital is physically present beneath the modern city</span></div>
+                <div class="detail"><b>Pace</b><span>Reflective, contextual, and best paired with Centro walking</span></div>
+              </div>
+              <div class="chips"><span>Templo Mayor</span><span>Tenochtitlan</span><span>Maize</span><span>Cacao</span></div>
             </div>
           </article>
 
           <article class="area">
             <div class="photo"><img alt="Casa Azul Frida Kahlo Museum exterior in Coyoacan Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Casa_Azul.jpg"></div>
             <div class="area-copy">
-              <h3>Coyoacan</h3>
+              <h3>Coyoacan and Casa Azul</h3>
               <p>Color, coffee, markets, plazas, and a slower neighborhood rhythm. Coyoacan brings together the public life of the plaza, the intimacy of old residential streets, and the vivid landmark presence of Casa Azul.</p>
               <p>The food route leans into market grazing and classic neighborhood stops: tostadas, aguas frescas, cafe culture, sweets, and the small decisions that make a day feel delicious without becoming overplanned.</p>
               <div class="area-details">
                 <div class="detail"><b>Landmark</b><span>Casa Azul and the historic center of Coyoacan</span></div>
                 <div class="detail"><b>Food lens</b><span>Market tostadas, fruit, coffee, churros, and neighborhood classics</span></div>
-                <div class="detail"><b>Cultural note</b><span>Artistic legacy, plaza life, and a strong sense of local identity</span></div>
+                <div class="detail"><b>Art note</b><span>Frida Kahlo, Diego Rivera, domestic color, and artistic pilgrimage</span></div>
                 <div class="detail"><b>Pace</b><span>Gentler, colorful, and built for wandering between bites</span></div>
               </div>
               <div class="chips"><span>Casa Azul</span><span>Mercado de Coyoacan</span><span>Jardin Centenario</span><span>Cafe stops</span></div>
@@ -507,13 +578,13 @@
           <article class="area">
             <div class="photo"><img alt="Colorful trajinera boat on the Xochimilco canals in Mexico City" src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Trajinera_de_Xochimilco_-_Ciudad_de_M%C3%A9xico.jpg"></div>
             <div class="area-copy">
-              <h3>Xochimilco</h3>
+              <h3>Xochimilco and the chinampa landscape</h3>
               <p>Canals, trajineras, snacks, music, and the living garden history of the city. Xochimilco is bright and communal, but it also carries deep agricultural memory through the chinampa system.</p>
               <p>This stop is designed for joy without flattening the place into spectacle: a floating route, shared food, local vendors, music in the air, and enough context to understand why the canals still matter.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>The Xochimilco canals and trajinera docks</span></div>
+                <div class="detail"><b>Landmark</b><span>The Xochimilco canals, trajinera docks, and chinampa water landscape</span></div>
                 <div class="detail"><b>Food lens</b><span>Canal snacks, shared plates, drinks, and floating vendors</span></div>
-                <div class="detail"><b>Cultural note</b><span>Chinampa agriculture and a living pre-Hispanic water landscape</span></div>
+                <div class="detail"><b>Cultural note</b><span>A living agricultural system with pre-Hispanic roots</span></div>
                 <div class="detail"><b>Pace</b><span>Relaxed, social, colorful, and best experienced together</span></div>
               </div>
               <div class="chips"><span>Trajinera ride</span><span>Canal snacks</span><span>Chinampa history</span><span>Floating rhythm</span></div>
@@ -521,31 +592,47 @@
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Angel of Independence landmark near Roma Condesa and Reforma Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Angel_of_Independence_Mexico_City.jpg"></div>
+            <div class="photo"><img alt="Chapultepec Castle in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Chapultepec_castle_in_Mexico_city.jpg"></div>
             <div class="area-copy">
-              <h3>Roma, Condesa, and Reforma</h3>
-              <p>Tree-lined streets, cafes, street food, design, bookstores, parks, and the creative neighborhood energy that makes contemporary Mexico City feel so alive. Reforma gives this route a landmark spine, while Roma and Condesa bring the human-scale food texture.</p>
-              <p>Expect a mix of daytime grazing and polished stops: tacos, bakeries, coffee, mezcal, small plates, and neighborhood walks that move between Art Deco facades, green plazas, and busy corners.</p>
+              <h3>Chapultepec Castle and the Anthropology corridor</h3>
+              <p>Chapultepec brings grandeur without losing air: parkland, castle views, national history, and one of the city's most important museum corridors. It gives the trip a more elegant day shape, with room for art, history, and a long meal after the park.</p>
+              <p>Nearby, the National Museum of Anthropology can frame the ingredients and traditions guests have been tasting all week: corn, cacao, ritual objects, regional identities, and the depth behind everyday food.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Angel of Independence, Parque Mexico, and nearby neighborhood corridors</span></div>
-                <div class="detail"><b>Food lens</b><span>Cafes, bakeries, tacos, wine bars, mezcal, and modern Mexican cooking</span></div>
-                <div class="detail"><b>Cultural note</b><span>A view into the city's design, nightlife, and contemporary creative scene</span></div>
-                <div class="detail"><b>Pace</b><span>Urban, flexible, and ideal for tasting across several stops</span></div>
+                <div class="detail"><b>Landmark</b><span>Chapultepec Castle, Bosque de Chapultepec, and the museum corridor</span></div>
+                <div class="detail"><b>Food lens</b><span>Park pacing, museum cafe pauses, seafood, regional cooking, and polished dinners</span></div>
+                <div class="detail"><b>Art note</b><span>National history, architecture, anthropology, and high cultural context</span></div>
+                <div class="detail"><b>Pace</b><span>Expansive, refined, and visually generous</span></div>
               </div>
-              <div class="chips"><span>Reforma</span><span>Parque Mexico</span><span>Street food</span><span>Neighborhood walks</span></div>
+              <div class="chips"><span>Chapultepec</span><span>Castle</span><span>Anthropology</span><span>Parkland</span></div>
             </div>
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Museo Soumaya exterior in Polanco Mexico City" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Exterior_del_Museo_Soumaya.jpg"></div>
+            <div class="photo"><img alt="Angel of Independence landmark on Paseo de la Reforma in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Angel_of_Independence_Mexico_City.jpg"></div>
             <div class="area-copy">
-              <h3>Polanco</h3>
-              <p>Museums, architecture, polished dining, and a more refined rhythm. Polanco adds contrast to the trip: contemporary architecture, design-forward streets, and restaurants where Mexican ingredients can be presented with precision.</p>
-              <p>This is not where the tour becomes formal or stiff. It is where the food-first thread expands into architecture, service, craft, and the visual drama of Museo Soumaya and the museum district.</p>
+              <h3>Reforma, Roma, and Condesa</h3>
+              <p>Reforma gives the route a ceremonial spine with the Angel of Independence, while Roma and Condesa bring the human-scale texture: trees, cafes, bookstores, street food, parks, mezcal, design, and the creative energy that makes contemporary Mexico City feel alive.</p>
+              <p>Expect a mix of daytime grazing and polished stops: tacos, bakeries, coffee, small plates, wine bars, and walks that move between monuments, Art Deco facades, green plazas, and busy corners.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Museo Soumaya, Museo Jumex, and the Nuevo Polanco museum district</span></div>
+                <div class="detail"><b>Landmark</b><span>Angel of Independence, Paseo de la Reforma, Parque Mexico, and neighborhood corridors</span></div>
+                <div class="detail"><b>Food lens</b><span>Cafes, bakeries, tacos, wine bars, mezcal, and modern Mexican cooking</span></div>
+                <div class="detail"><b>Cultural note</b><span>A view into the city's design, nightlife, and contemporary creative scene</span></div>
+                <div class="detail"><b>Pace</b><span>Urban, flexible, and ideal for tasting across several stops</span></div>
+              </div>
+              <div class="chips"><span>Reforma</span><span>Angel</span><span>Parque Mexico</span><span>Neighborhood walks</span></div>
+            </div>
+          </article>
+
+          <article class="area">
+            <div class="photo"><img alt="Museo Soumaya in Plaza Carso Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Museo_Soumaya_Plaza.jpg"></div>
+            <div class="area-copy">
+              <h3>Polanco, Soumaya, and Jumex</h3>
+              <p>Polanco adds a more refined rhythm: contemporary architecture, design-forward streets, major museum collections, and restaurants where Mexican ingredients can be presented with precision.</p>
+              <p>This is where the food-first thread expands into architecture, service, craft, and the visual drama of Soumaya's sculptural exterior beside Jumex's contemporary art program. High-end, but still warm.</p>
+              <div class="area-details">
+                <div class="detail"><b>Landmark</b><span>Museo Soumaya, Museo Jumex, Plaza Carso, and the Nuevo Polanco museum district</span></div>
                 <div class="detail"><b>Food lens</b><span>Elevated dining, pastry, cocktails, seafood, and regional technique</span></div>
-                <div class="detail"><b>Cultural note</b><span>A polished view of the city's art, architecture, and restaurant ambition</span></div>
+                <div class="detail"><b>Art note</b><span>Major collections, contemporary art, architecture, and restaurant ambition</span></div>
                 <div class="detail"><b>Pace</b><span>Refined but relaxed, with time to look up between meals</span></div>
               </div>
               <div class="chips"><span>Soumaya</span><span>Jumex</span><span>Elevated dining</span><span>Architecture</span></div>
@@ -658,7 +745,7 @@
       scene.add(key);
       scene.add(new THREE.AmbientLight(0xf7dca2, 1.15));
 
-      const palette = [0xb55237, 0xe2ac3f, 0x23687d, 0x18473d, 0xfff3d6];
+      const palette = [0xb55237, 0xf2a91f, 0x1f9aa0, 0x18473d, 0xbe2f6b, 0xfff3d6];
       const group = new THREE.Group();
       scene.add(group);
 
