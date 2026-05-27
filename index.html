@@ -77,6 +77,7 @@
       align-items: end;
       position: relative;
       isolation: isolate;
+      overflow: hidden;
     }
     .hero:after {
       content: "";
@@ -84,7 +85,17 @@
       inset: auto 0 0;
       height: 120px;
       background: linear-gradient(0deg, var(--paper), transparent);
-      z-index: -1;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .92;
     }
     .hero-inner {
       padding: 72px 0 104px;
@@ -92,6 +103,8 @@
       grid-template-columns: minmax(0, 1fr) 360px;
       gap: 48px;
       align-items: end;
+      position: relative;
+      z-index: 1;
     }
     h1 {
       max-width: 820px;
@@ -336,6 +349,7 @@
       .wrap { width: min(100% - 28px, 1180px); }
       section { padding: 58px 0; }
       .hero { min-height: 760px; }
+      .hero-canvas { opacity: .78; }
       h1 { font-size: clamp(46px, 14vw, 70px); }
       .area-details, .rhythm { grid-template-columns: 1fr; }
       .panel, .signal, .date-card, .fit-card { padding: 22px; }
@@ -346,6 +360,7 @@
 <body>
   <main>
     <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
       <div class="wrap hero-inner">
         <div>
           <p class="eyebrow">Private invitation · Mexico City</p>
@@ -622,5 +637,113 @@
   <footer>
     <div class="wrap">Private Verk Vibe invitation page. Mexico City Food Tour 2026 · November 15-20, 2026.</div>
   </footer>
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
+
+    const canvas = document.querySelector(".hero-canvas");
+    const hero = document.querySelector(".hero");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (canvas && hero) {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, 1, .1, 100);
+      camera.position.set(0, 0, 13);
+
+      const key = new THREE.DirectionalLight(0xfff4df, 2.4);
+      key.position.set(-4, 5, 7);
+      scene.add(key);
+      scene.add(new THREE.AmbientLight(0xf7dca2, 1.15));
+
+      const palette = [0xb55237, 0xe2ac3f, 0x23687d, 0x18473d, 0xfff3d6];
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const tileGeometry = new THREE.BoxGeometry(1, .42, .045, 1, 1, 1);
+      const diamondGeometry = new THREE.ConeGeometry(.36, .82, 4, 1);
+      const beadGeometry = new THREE.SphereGeometry(.12, 16, 12);
+      const pieces = [];
+
+      for (let i = 0; i < 36; i += 1) {
+        const material = new THREE.MeshStandardMaterial({
+          color: palette[i % palette.length],
+          roughness: .72,
+          metalness: .08,
+          transparent: true,
+          opacity: i % 5 === 4 ? .58 : .72
+        });
+        const mesh = new THREE.Mesh(i % 3 === 0 ? diamondGeometry : tileGeometry, material);
+        const side = i % 2 === 0 ? 1 : -1;
+        const layer = Math.floor(i / 6);
+        mesh.position.set(
+          side * (2.6 + (i % 6) * .72),
+          3.2 - layer * 1.05 + Math.sin(i) * .3,
+          -2.8 - (i % 4) * .65
+        );
+        mesh.rotation.set(Math.sin(i * 1.7) * .8, Math.cos(i * .9) * .7, (i % 3) * .42);
+        mesh.userData = {
+          baseX: mesh.position.x,
+          baseY: mesh.position.y,
+          speed: .22 + (i % 7) * .025,
+          drift: .12 + (i % 5) * .03
+        };
+        pieces.push(mesh);
+        group.add(mesh);
+      }
+
+      for (let i = 0; i < 42; i += 1) {
+        const bead = new THREE.Mesh(
+          beadGeometry,
+          new THREE.MeshStandardMaterial({ color: palette[(i + 2) % palette.length], roughness: .8, transparent: true, opacity: .42 })
+        );
+        bead.position.set((Math.random() - .5) * 12, (Math.random() - .15) * 7, -4 - Math.random() * 4);
+        bead.userData = { baseX: bead.position.x, baseY: bead.position.y, speed: .12 + Math.random() * .18, drift: .08 + Math.random() * .14 };
+        pieces.push(bead);
+        group.add(bead);
+      }
+
+      const resize = () => {
+        const rect = hero.getBoundingClientRect();
+        const width = Math.max(1, Math.floor(rect.width));
+        const height = Math.max(1, Math.floor(rect.height));
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        group.position.x = width < 760 ? 1.35 : 1.8;
+        group.position.y = width < 760 ? .15 : .35;
+        group.scale.setScalar(width < 760 ? .72 : 1);
+      };
+
+      let pointerX = 0;
+      window.addEventListener("pointermove", (event) => {
+        pointerX = (event.clientX / Math.max(1, window.innerWidth) - .5) * .55;
+      }, { passive: true });
+      window.addEventListener("resize", resize, { passive: true });
+      resize();
+
+      const clock = new THREE.Clock();
+      const render = () => {
+        const time = clock.getElapsedTime();
+        group.rotation.y = pointerX + Math.sin(time * .16) * .08;
+        group.rotation.x = Math.sin(time * .11) * .035;
+
+        pieces.forEach((piece, index) => {
+          const motion = reduceMotion ? 0 : time * piece.userData.speed;
+          piece.position.y = piece.userData.baseY + Math.sin(motion + index) * piece.userData.drift;
+          piece.position.x = piece.userData.baseX + Math.cos(motion * .72 + index) * piece.userData.drift;
+          piece.rotation.z += reduceMotion ? 0 : .0016 + (index % 5) * .00022;
+          piece.rotation.x += reduceMotion ? 0 : .0008;
+        });
+
+        renderer.render(scene, camera);
+        if (!reduceMotion) requestAnimationFrame(render);
+      };
+
+      render();
+    }
+  </script>
 </body>
 </html>
