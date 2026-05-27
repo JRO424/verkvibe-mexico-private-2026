@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <title>Mexico City Food Tour 2026 | Verk Vibe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #17201d;
@@ -22,6 +25,8 @@
       --muted: #686f65;
       --line: rgba(23, 32, 29, .16);
       --shadow: 0 20px 58px rgba(17, 39, 37, .18);
+      --active: var(--cantera);
+      --active-soft: rgba(181, 82, 55, .16);
     }
     * { box-sizing: border-box; min-width: 0; }
     html { scroll-behavior: smooth; }
@@ -34,8 +39,36 @@
         linear-gradient(135deg, rgba(242,169,31,.08), transparent 42%, rgba(190,47,107,.055)),
         var(--paper);
       background-size: 34px 34px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Outfit, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
+      transition: background-color .6s cubic-bezier(.16, 1, .3, 1);
+    }
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+      opacity: .07;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+    }
+    body[data-tone="nopal"] { --active: var(--nopal); --active-soft: rgba(24, 71, 61, .18); }
+    body[data-tone="maize"] { --active: var(--cempasuchil); --active-soft: rgba(242, 169, 31, .22); }
+    body[data-tone="turquesa"] { --active: var(--turquesa); --active-soft: rgba(31, 154, 160, .2); }
+    body[data-tone="bugambilia"] { --active: var(--bugambilia); --active-soft: rgba(190, 47, 107, .18); }
+    .scroll-aura {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 10px;
+      height: 100dvh;
+      z-index: 20;
+      pointer-events: none;
+      opacity: .72;
+      background: linear-gradient(180deg, transparent, var(--active), var(--cempasuchil), transparent);
+      filter: saturate(1.2);
+      transition: background .7s cubic-bezier(.16, 1, .3, 1), opacity .4s ease;
     }
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
     a { color: inherit; text-decoration: none; }
@@ -46,7 +79,7 @@
       gap: 10px;
       color: var(--cantera);
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 800;
       letter-spacing: .16em;
       text-transform: uppercase;
     }
@@ -65,7 +98,7 @@
       padding: 0 22px;
       border-radius: 999px;
       font-size: 13px;
-      font-weight: 850;
+      font-weight: 800;
       border: 1px solid transparent;
       transition: transform .2s ease, background .2s ease;
     }
@@ -114,7 +147,7 @@
     h1 {
       max-width: 820px;
       margin: 20px 0 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Fraunces, Georgia, "Times New Roman", serif;
       font-size: clamp(54px, 8vw, 112px);
       line-height: .88;
       font-weight: 500;
@@ -137,11 +170,32 @@
       backdrop-filter: blur(14px);
     }
     .signal b { display: block; color: var(--maize); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
-    .signal strong { display: block; margin-top: 12px; font-family: Georgia, "Times New Roman", serif; font-size: 34px; line-height: 1; font-weight: 500; }
+    .signal strong { display: block; margin-top: 12px; font-family: Fraunces, Georgia, "Times New Roman", serif; font-size: 34px; line-height: 1; font-weight: 500; }
     .signal p { margin: 14px 0 0; color: rgba(255,250,241,.76); line-height: 1.5; }
     .signal-list { margin-top: 18px; display: grid; gap: 10px; color: rgba(255,250,241,.82); font-size: 14px; }
     .signal-list span { padding-top: 10px; border-top: 1px solid rgba(251,244,231,.2); }
     section { padding: 72px 0; }
+    section:not(.hero) {
+      position: relative;
+      isolation: isolate;
+    }
+    section:not(.hero):before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      z-index: 0;
+      background: linear-gradient(90deg, transparent, var(--active), var(--cempasuchil), transparent);
+      opacity: 0;
+      transform: scaleX(.45);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+      transform-origin: center;
+      pointer-events: none;
+    }
+    section.is-lit:before {
+      opacity: .9;
+      transform: scaleX(1);
+    }
     .intro {
       display: grid;
       grid-template-columns: .82fr 1.18fr;
@@ -150,7 +204,7 @@
     }
     h2 {
       margin: 14px 0 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Fraunces, Georgia, "Times New Roman", serif;
       font-size: clamp(38px, 4.7vw, 68px);
       line-height: .98;
       font-weight: 500;
@@ -159,7 +213,7 @@
     }
     h3 {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Fraunces, Georgia, "Times New Roman", serif;
       font-size: clamp(28px, 3vw, 42px);
       line-height: 1.04;
       font-weight: 500;
@@ -181,9 +235,29 @@
       margin-top: 28px;
     }
     .heritage-strip span {
+      position: relative;
+      overflow: hidden;
       height: 10px;
       border-radius: 999px;
       box-shadow: 0 8px 24px rgba(23,32,29,.12);
+    }
+    .heritage-strip span:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,250,241,.58), transparent);
+      transform: translateX(-110%);
+      animation: strip-shimmer 4.8s cubic-bezier(.16, 1, .3, 1) infinite;
+      animation-delay: calc(var(--i, 0) * .2s);
+    }
+    .heritage-strip span:nth-child(1) { --i: 0; }
+    .heritage-strip span:nth-child(2) { --i: 1; }
+    .heritage-strip span:nth-child(3) { --i: 2; }
+    .heritage-strip span:nth-child(4) { --i: 3; }
+    .heritage-strip span:nth-child(5) { --i: 4; }
+    @keyframes strip-shimmer {
+      0%, 58% { transform: translateX(-110%); }
+      82%, 100% { transform: translateX(110%); }
     }
     .heritage-strip span:nth-child(1) { background: var(--nopal); }
     .heritage-strip span:nth-child(2) { background: var(--cempasuchil); }
@@ -216,6 +290,11 @@
         linear-gradient(135deg, #102722, #194b41 43%, #6e2b3e 72%, #4b3026);
       background-size: 30px 30px, 30px 30px, auto;
     }
+    .dark.is-lit .date-card,
+    .dark.is-lit .rhythm div {
+      border-color: rgba(255,250,241,.32);
+      box-shadow: inset 0 1px 0 rgba(255,250,241,.08), 0 18px 52px rgba(16,39,34,.14);
+    }
     .section-head {
       display: grid;
       grid-template-columns: .9fr 1.1fr;
@@ -237,7 +316,7 @@
       padding: 24px;
       background: rgba(251,244,231,.07);
     }
-    .date-card span { color: var(--maize); font-weight: 850; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    .date-card span { color: var(--maize); font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
     .date-card h3 { margin-top: 16px; font-size: 31px; }
     .date-card p { color: rgba(255,250,241,.76); margin-bottom: 0; }
     .micro-list {
@@ -264,12 +343,24 @@
     .rhythm b { display: block; color: var(--maize); }
     .rhythm p { margin: 7px 0 0; color: rgba(255,250,241,.72); font-size: 14px; line-height: 1.48; }
     .landmark-section {
+      position: relative;
       background:
         linear-gradient(90deg, rgba(24,71,61,.08) 1px, transparent 1px),
         linear-gradient(0deg, rgba(242,169,31,.11) 1px, transparent 1px),
         linear-gradient(180deg, rgba(255,250,241,.72), rgba(255,243,223,.9));
       background-size: 42px 42px, 42px 42px, auto;
     }
+    .landmark-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: .5;
+      mix-blend-mode: multiply;
+    }
+    .landmark-section > .wrap { position: relative; z-index: 1; }
     .areas { display: grid; gap: 24px; }
     .area {
       display: grid;
@@ -282,6 +373,14 @@
       padding: 24px;
       background: rgba(255,250,241,.72);
       box-shadow: 0 16px 44px rgba(17,39,37,.08);
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease;
+    }
+    .area.is-visible {
+      box-shadow: 0 18px 54px rgba(17,39,37,.1), inset 0 1px 0 rgba(255,255,255,.6);
+    }
+    .area:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 64px rgba(17,39,37,.14), inset 0 1px 0 rgba(255,255,255,.65);
     }
     .area:nth-child(2n) { border-left-color: var(--turquesa); }
     .area:nth-child(3n) { border-left-color: var(--cempasuchil); }
@@ -299,6 +398,12 @@
     }
     .photo img {
       filter: saturate(1.08) contrast(1.02);
+      transform: scale(1.012);
+      transition: transform .7s cubic-bezier(.16, 1, .3, 1), filter .7s cubic-bezier(.16, 1, .3, 1);
+    }
+    .area:hover .photo img {
+      filter: saturate(1.16) contrast(1.04);
+      transform: scale(1.045);
     }
     .area-copy { padding: 6px 0 0; }
     .area-copy p { color: var(--muted); margin: 14px 0 0; }
@@ -346,6 +451,21 @@
       padding: 30px;
       box-shadow: 0 14px 42px rgba(17,39,37,.08);
     }
+    .panel,
+    .fit-card,
+    .texture-card,
+    .date-card,
+    .rhythm div,
+    .signal {
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease;
+    }
+    .panel:hover,
+    .fit-card:hover,
+    .texture-card:hover,
+    .date-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 54px rgba(17,39,37,.12);
+    }
     .panel .eyebrow { color: var(--cantera); }
     .panel p { color: var(--muted); margin: 12px 0 0; }
     ul { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
@@ -388,16 +508,30 @@
       section { padding: 58px 0; }
       .hero { min-height: 760px; }
       .hero-canvas { opacity: .78; }
+      .scroll-aura { width: 5px; opacity: .55; }
+      .landmark-canvas { opacity: .24; }
       h1 { font-size: clamp(46px, 14vw, 70px); }
       .area-details, .rhythm { grid-template-columns: 1fr; }
       .panel, .signal, .date-card, .fit-card { padding: 22px; }
       .button { width: 100%; }
     }
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: .001;
+        transform: translateY(22px);
+        transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="scroll-aura" aria-hidden="true"></div>
   <main>
-    <section class="hero">
+    <section class="hero" data-tone="nopal">
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
       <div class="wrap hero-inner">
         <div>
@@ -422,7 +556,7 @@
       </div>
     </section>
 
-    <section>
+    <section data-tone="maize">
       <div class="wrap intro">
         <div>
           <p class="eyebrow">Hosted by Jon Orozco</p>
@@ -451,7 +585,7 @@
       </div>
     </section>
 
-    <section id="itinerary" class="dark">
+    <section id="itinerary" class="dark" data-tone="nopal">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -501,7 +635,8 @@
       </div>
     </section>
 
-    <section class="landmark-section">
+    <section class="landmark-section" data-tone="turquesa">
+      <canvas class="landmark-canvas" aria-hidden="true"></canvas>
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -642,7 +777,7 @@
       </div>
     </section>
 
-    <section class="dark">
+    <section class="dark" data-tone="bugambilia">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -684,7 +819,7 @@
       </div>
     </section>
 
-    <section>
+    <section data-tone="maize">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -710,7 +845,7 @@
       </div>
     </section>
 
-    <section class="cta">
+    <section class="cta" data-tone="nopal">
       <div class="wrap">
         <p class="eyebrow">The llenito promise</p>
         <h2>You will not be left hungry.</h2>
@@ -734,7 +869,7 @@
     if (canvas && hero) {
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-      renderer.setClearColor(0x000000, 0);
+      renderer.setClearColor(0x102722, 0);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(42, 1, .1, 100);
@@ -831,6 +966,100 @@
 
       render();
     }
+
+    const landmarkCanvas = document.querySelector(".landmark-canvas");
+    const landmarkSection = document.querySelector(".landmark-section");
+
+    if (landmarkCanvas && landmarkSection) {
+      const renderer = new THREE.WebGLRenderer({ canvas: landmarkCanvas, alpha: true, antialias: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.setClearColor(0x102722, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
+      camera.position.set(0, 0, 18);
+
+      scene.add(new THREE.AmbientLight(0xfff0d4, 1.35));
+      const light = new THREE.DirectionalLight(0xffffff, 2.2);
+      light.position.set(4, 7, 8);
+      scene.add(light);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const wireMaterial = new THREE.LineBasicMaterial({ color: 0x1f9aa0, transparent: true, opacity: .52 });
+      const goldWire = new THREE.LineBasicMaterial({ color: 0xf2a91f, transparent: true, opacity: .44 });
+      const roseMaterial = new THREE.MeshStandardMaterial({ color: 0xbe2f6b, roughness: .52, metalness: .12, transparent: true, opacity: .28 });
+      const canteraMaterial = new THREE.MeshStandardMaterial({ color: 0xb55237, roughness: .7, metalness: .08, transparent: true, opacity: .26 });
+
+      const knot = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.TorusKnotGeometry(2.4, .32, 110, 14)), wireMaterial);
+      const ring = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.TorusGeometry(4.3, .035, 8, 110)), goldWire);
+      const gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, 1), roseMaterial);
+      const tile = new THREE.Mesh(new THREE.BoxGeometry(5.4, .58, .06), canteraMaterial);
+      knot.position.set(5.7, 5.2, -3);
+      ring.position.set(5.7, 5.2, -3.2);
+      ring.rotation.x = 1.1;
+      gem.position.set(-5.9, -2.8, -5);
+      tile.position.set(-5.2, 1.4, -4.2);
+      tile.rotation.z = -.55;
+      group.add(knot, ring, gem, tile);
+
+      const resize = () => {
+        const rect = landmarkSection.getBoundingClientRect();
+        const width = Math.max(1, Math.floor(rect.width));
+        const height = Math.max(1, Math.floor(rect.height));
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        group.scale.setScalar(width < 760 ? .62 : 1);
+      };
+
+      window.addEventListener("resize", resize, { passive: true });
+      resize();
+
+      const clock = new THREE.Clock();
+      const render = () => {
+        const time = clock.getElapsedTime();
+        knot.rotation.x = time * .055;
+        knot.rotation.y = time * .075;
+        ring.rotation.z = time * .035;
+        gem.rotation.y = time * .09;
+        gem.position.y = -2.8 + Math.sin(time * .4) * .35;
+        tile.rotation.x = Math.sin(time * .24) * .18;
+        renderer.render(scene, camera);
+        if (!reduceMotion) requestAnimationFrame(render);
+      };
+
+      render();
+    }
+
+    document.querySelectorAll(".section-head, .texture-card, .privacy, .date-card, .rhythm div, .area, .panel, .fit-card, .cta .eyebrow, .cta h2, .cta p, .cta .button").forEach((element, index) => {
+      element.classList.add("reveal");
+      element.style.transitionDelay = `${Math.min(index % 8, 6) * 55}ms`;
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: .16, rootMargin: "0px 0px -8% 0px" });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".reveal").forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) element.classList.add("is-visible");
+      });
+    });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-lit", entry.isIntersecting);
+        if (entry.isIntersecting) document.body.dataset.tone = entry.target.dataset.tone || "nopal";
+      });
+    }, { threshold: .01, rootMargin: "-20% 0px -20% 0px" });
+
+    document.querySelectorAll("section[data-tone]").forEach((section) => sectionObserver.observe(section));
   </script>
 </body>
 </html>
