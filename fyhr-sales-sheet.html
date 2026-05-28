@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>FYHR — Executive Operator System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2E5575;
+      --blue-deep: #24445e;
+      --blue-soft: #eef2f6;
+      --ink: #14181c;
+      --body: #3f4750;
+      --muted: #6b747d;
+      --line: #e1e5ea;
+      --line-strong: #cfd6dd;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: #cdd2d8;
+      color: var(--body);
+      font-family: "Roboto", Arial, "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px;
+    }
+    h1, h2, h3, h4, .brand-mark, .price, .stat {
+      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    }
+
+    .sheet {
+      width: 816px;
+      height: 1056px;
+      background: var(--white);
+      box-shadow: 0 24px 70px rgba(20, 35, 50, .28);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ============ SECTION 1 — HEADER BAND ============ */
+    .header {
+      background: var(--blue);
+      background-image: linear-gradient(135deg, #335d81 0%, #2E5575 46%, #264a66 100%);
+      color: var(--white);
+      padding: 22px 48px 19px;
+      display: grid;
+      grid-template-columns: 178px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .brand {
+      border-right: 1px solid rgba(255, 255, 255, .26);
+      padding-right: 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand-mark {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .brand-rule {
+      width: 34px;
+      height: 3px;
+      background: rgba(255, 255, 255, .7);
+      margin: 12px 0 11px;
+    }
+    .brand-tag {
+      font-size: 10px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .8);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .header h1 {
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -.2px;
+    }
+    .header .subhead {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #cfe0ee;
+      margin-top: 7px;
+      letter-spacing: .1px;
+    }
+    .header .lede {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .9);
+      margin-top: 8px;
+      max-width: 560px;
+    }
+    .header .lede strong { color: #fff; font-weight: 500; }
+
+    /* ============ SHARED CONTENT ============ */
+    .body-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 48px;
+    }
+    .block { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .block:last-child { border-bottom: 0; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+    .sec-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.18;
+      margin-top: 6px;
+      letter-spacing: -.2px;
+    }
+    .sec-intro {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-top: 5px;
+      max-width: 660px;
+    }
+
+    /* ============ SECTION 2 — PROBLEM ============ */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px 10px;
+      margin-top: 8px;
+    }
+    .pain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fafbfc;
+    }
+    .pain svg { flex: 0 0 18px; width: 18px; height: 18px; stroke: var(--blue); }
+    .pain span {
+      font-size: 10.3px;
+      line-height: 1.25;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ============ SECTION 3 — SOLUTION ============ */
+    .sol-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 7px;
+    }
+    .sol {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 7px;
+      text-align: center;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .sol.feature {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .sol.feature .sol-label { color: #fff; }
+    .sol.feature svg { stroke: #fff; }
+    .sol svg { width: 18px; height: 18px; stroke: var(--blue); }
+    .sol-label {
+      font-size: 9.3px;
+      line-height: 1.18;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .trademark { font-size: 11px; vertical-align: super; color: var(--blue); }
+
+    /* ============ SECTION 4 — WHY EXECUTIVES BUY ============ */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 11px;
+      margin-top: 8px;
+    }
+    .benefit {
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+      border-radius: 6px;
+      padding: 11px 11px 12px;
+      background: #fafbfc;
+    }
+    .benefit h4 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.22;
+      margin-bottom: 7px;
+    }
+    .benefit ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .benefit li {
+      font-size: 9.4px;
+      line-height: 1.35;
+      color: var(--body);
+      padding-left: 12px;
+      position: relative;
+    }
+    .benefit li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* ============ SECTION 5 + 6 — GUARANTEE & INVESTMENT ============ */
+    .pair {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 16px;
+      margin-top: 2px;
+    }
+    .guarantee {
+      border: 1px solid var(--line-strong);
+      border-left: 4px solid var(--blue);
+      border-radius: 7px;
+      background: var(--blue-soft);
+      padding: 13px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .badge svg { width: 15px; height: 15px; stroke: var(--blue); }
+    .guarantee h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .guarantee p { font-size: 10.3px; line-height: 1.55; color: var(--body); }
+    .guarantee p strong { color: var(--ink); font-weight: 700; }
+
+    .investment {
+      border: 1px solid var(--blue);
+      border-radius: 7px;
+      background: var(--blue);
+      background-image: linear-gradient(150deg, #335d81, #264a66);
+      color: #fff;
+      padding: 13px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .investment .label {
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .82);
+    }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin: 4px 0 3px; }
+    .price { font-size: 38px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
+    .price-note { font-size: 9.5px; color: rgba(255, 255, 255, .82); }
+    .incl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 14px;
+      margin-top: 10px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(255, 255, 255, .25);
+    }
+    .incl li {
+      list-style: none;
+      font-size: 9.4px;
+      line-height: 1.3;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .incl svg { flex: 0 0 11px; width: 11px; height: 11px; stroke: #cfe0ee; }
+
+    /* ============ SECTION 7 — CTA FOOTER ============ */
+    .footer {
+      background: var(--blue);
+      background-image: linear-gradient(135deg, #264a66, #2E5575 60%, #335d81);
+      color: #fff;
+      padding: 15px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .footer h2 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.22;
+    }
+    .footer p {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .9);
+      margin-top: 7px;
+      max-width: 430px;
+    }
+    .cta-btn {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #fff;
+      color: var(--blue-deep);
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      padding: 14px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .22);
+      white-space: nowrap;
+    }
+    .cta-btn svg { width: 15px; height: 15px; stroke: var(--blue-deep); }
+
+    /* ============ PRINT ============ */
+    @page { size: 8.5in 11in; margin: 0; }
+    @media print {
+      body { background: #fff; padding: 0; display: block; }
+      .sheet { box-shadow: none; width: 100%; height: 100vh; }
+      .header, .footer, .investment, .sol.feature {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 860px) {
+      body { padding: 0; }
+      .sheet { width: 100%; height: auto; box-shadow: none; }
+      .header { grid-template-columns: 1fr; gap: 18px; padding: 26px 24px; }
+      .brand { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.26); padding: 0 0 16px; }
+      .body-area { padding: 0 24px; }
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .sol-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit-grid { grid-template-columns: 1fr 1fr; }
+      .pair { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+      .cta-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+
+    <!-- SECTION 1 — HEADER BAND -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-mark">FYHR</div>
+        <div class="brand-rule"></div>
+        <div class="brand-tag">Operational<br>Modernization</div>
+      </div>
+      <div>
+        <h1>Modernize Your Operations Without Expanding Headcount</h1>
+        <div class="subhead">Help one trusted employee accomplish the work of an entire support team.</div>
+        <p class="lede">Most growing businesses are not struggling because of bad employees. They are struggling under disconnected systems, repetitive administrative work, and operational overload. <strong>FYHR installs modern operational systems</strong> that help your existing team move faster, stay organized, and reduce administrative friction&nbsp;&mdash;&nbsp;without disrupting your business.</p>
+      </div>
+    </header>
+
+    <div class="body-area">
+
+      <!-- SECTION 2 — THE PROBLEM -->
+      <section class="block">
+        <div class="eyebrow">The Problem</div>
+        <h2 class="sec-title">Your Business Grew. Your Systems Didn&rsquo;t.</h2>
+        <div class="pain-grid">
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3 3 0 0 0-4 4l-7 7 3 3 7-7a3 3 0 0 0 4-4l-2 2-2.4-.6-.6-2.4Z"/></svg>
+            <span>Too much manual work</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 9h7M8 13h7M8 17h4"/></svg>
+            <span>Employees buried in admin tasks</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            <span>Reporting takes too long</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>
+            <span>Leadership constantly following up</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18a4 4 0 0 1-1-7.9A4.5 4.5 0 0 1 16.5 9 3.5 3.5 0 0 1 16 16"/><path d="M12 12v6M9.5 15.5 12 18l2.5-2.5"/></svg>
+            <span>Knowledge trapped in people&rsquo;s heads</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12 7 14a3 3 0 0 1-4-4l2-2M15 12l2-2a3 3 0 0 1 4 4l-2 2"/><path d="M9.5 14.5 8 16M16 8l-1.5 1.5"/></svg>
+            <span>Teams on disconnected systems</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.2"/><path d="M4.5 19a5.5 5.5 0 0 1 9.5-3.8"/><circle cx="17.5" cy="17.5" r="3"/><path d="m20 20 1.5 1.5"/></svg>
+            <span>Hard to find dependable staff</span>
+          </div>
+          <div class="pain">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13-3l2 2M20 15a8 8 0 0 1-13 3l-2-2"/><path d="M19 4v4h-4M5 20v-4h4"/></svg>
+            <span>Burnout from repetitive coordination</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 — THE SOLUTION -->
+      <section class="block">
+        <div class="eyebrow">The Solution</div>
+        <h2 class="sec-title">The Executive Operator System<span class="trademark">&trade;</span></h2>
+        <p class="sec-intro">A fully configured operational workstation and workflow system designed to help one trusted employee dramatically increase operational output across multiple business functions.</p>
+        <div class="sol-grid">
+          <div class="sol feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20l-1.5-2H3.5z"/></svg>
+            <span class="sol-label">Premium MacBook Pro included</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5M8 13h7M8 16h5"/></svg>
+            <span class="sol-label">Prebuilt operational workflows</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h4"/><path d="M12 3v3"/></svg>
+            <span class="sol-label">Secure documentation systems</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M12 9.5 14.5 12M9 15h6"/></svg>
+            <span class="sol-label">AI-assisted reporting support</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M6 8.4v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3M12 13.4v2.2"/></svg>
+            <span class="sol-label">Connected business systems</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M8 15v-3M12 15V9M16 15v-5"/></svg>
+            <span class="sol-label">Executive dashboards</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h6v6H6zM14 5h4v4h-4zM14 13h4v6h-4zM6 15h6v4H6z"/><path d="M12 8h2M16 9v4M9 11v4"/></svg>
+            <span class="sol-label">Workflow automation</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 4 8l8 4 8-4z"/><path d="M6 10v4c0 1.5 2.7 3 6 3s6-1.5 6-3v-4"/></svg>
+            <span class="sol-label">Training &amp; implementation</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z" /><path d="M9 4v16M13 9h3M13 12h3M13 15h2"/></svg>
+            <span class="sol-label">Operational playbooks</span>
+          </div>
+          <div class="sol">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6z"/><path d="m9 11 2 2 4-4"/></svg>
+            <span class="sol-label">White-glove setup</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — WHY EXECUTIVES BUY THIS -->
+      <section class="block">
+        <div class="eyebrow">Why Executives Choose FYHR</div>
+        <h2 class="sec-title">Built for Stability. Designed for Modern Operations.</h2>
+        <div class="benefit-grid">
+          <div class="benefit">
+            <h4>Reduce Operational Overload</h4>
+            <ul>
+              <li>Remove repetitive administrative work</li>
+              <li>Free your team for higher-value priorities</li>
+              <li>Lower coordination and follow-up</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <h4>Support Existing Employees</h4>
+            <ul>
+              <li>Strengthen your current team</li>
+              <li>No new hires or added headcount</li>
+              <li>Tools that make good people faster</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <h4>Improve Organizational Clarity</h4>
+            <ul>
+              <li>Centralize documentation and reporting</li>
+              <li>Capture knowledge in shared systems</li>
+              <li>Give leadership clear visibility</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <h4>Modernize Without Chaos</h4>
+            <ul>
+              <li>Calm, structured rollout</li>
+              <li>White-glove setup and onboarding</li>
+              <li>No disruption to daily operations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 + 6 — GUARANTEE & INVESTMENT -->
+      <section class="block">
+        <div class="pair">
+          <div class="guarantee">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6z"/><path d="m9 11 2 2 4-4"/></svg>
+              30-Day Guarantee
+            </div>
+            <h3>Operational Confidence Guarantee</h3>
+            <p>If your organization does not identify measurable operational improvements within the first 30 days, <strong>you keep the fully configured MacBook Pro at no additional cost.</strong></p>
+          </div>
+          <div class="investment">
+            <div class="label">Fixed-Fee Implementation</div>
+            <div class="price-row">
+              <div class="price">$35,000</div>
+              <div class="price-note">one engagement,<br>everything included</div>
+            </div>
+            <ul class="incl">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hardware included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Full setup included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Team training included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Workflow implementation</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Executive onboarding</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SECTION 7 — CTA FOOTER -->
+    <footer class="footer">
+      <div>
+        <h2>You do not need to become a tech company.</h2>
+        <p>You need systems that help your people operate with greater clarity, structure, and efficiency.</p>
+      </div>
+      <a class="cta-btn" href="#">
+        Schedule an Executive Discovery Call
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </footer>
+
+  </main>
+</body>
+</html>
