@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <title>Mexico City Food Tour 2026 | Verk Vibe</title>
+  <meta name="description" content="A private, small-group Mexico City food and culture tour hosted by Jon Orozco, November 15 to 20, 2026, closing with brunch as Corona Capital weekend begins.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -57,6 +58,7 @@
     body[data-tone="maize"] { --active: var(--cempasuchil); --active-soft: rgba(242, 169, 31, .22); }
     body[data-tone="turquesa"] { --active: var(--turquesa); --active-soft: rgba(31, 154, 160, .2); }
     body[data-tone="bugambilia"] { --active: var(--bugambilia); --active-soft: rgba(190, 47, 107, .18); }
+    body[data-tone="azul"] { --active: var(--azul); --active-soft: rgba(35, 104, 125, .2); }
     .scroll-aura {
       position: fixed;
       top: 0;
@@ -99,18 +101,57 @@
       border-radius: 999px;
       font-size: 13px;
       font-weight: 800;
+      letter-spacing: .01em;
       border: 1px solid transparent;
-      transition: transform .2s ease, background .2s ease;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
     }
     .button:hover { transform: translateY(-2px); }
     .button.primary { background: linear-gradient(135deg, var(--cantera), var(--bugambilia)); color: #fffaf1; box-shadow: 0 18px 45px rgba(181, 82, 55, .28); }
     .button.secondary { border-color: rgba(251, 244, 231, .54); color: #fffaf1; background: rgba(251, 244, 231, .08); }
+    .button.ghost { border-color: var(--line); color: var(--nopal); background: rgba(255,250,241,.7); }
+    .button.ghost:hover { border-color: var(--cantera); }
+
+    /* Sticky reserve bar */
+    .sticky-bar {
+      position: fixed;
+      left: 0; right: 0; top: 0;
+      z-index: 40;
+      transform: translateY(-110%);
+      transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+      background: rgba(17, 32, 29, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(242,169,31,.34);
+      color: #fffaf1;
+    }
+    .sticky-bar.show { transform: translateY(0); }
+    .sticky-inner {
+      width: min(100% - 36px, 1180px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 11px 0;
+    }
+    .sticky-bar .mark { font-family: Fraunces, Georgia, serif; font-size: 18px; font-weight: 650; white-space: nowrap; }
+    .sticky-meta { display: flex; gap: 16px; color: rgba(255,250,241,.78); font-size: 12.5px; font-weight: 600; letter-spacing: .02em; flex: 1; min-width: 0; }
+    .sticky-meta span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .sticky-meta span:before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cempasuchil); }
+    .sticky-bar .button { min-height: 40px; padding: 0 18px; font-size: 12px; }
+    .sticky-bar .sb-compact { display: none; }
+    @media (max-width: 760px) {
+      .sticky-meta { display: none; }
+      .sticky-inner { justify-content: space-between; gap: 12px; }
+      .sticky-bar .mark { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+      .sticky-bar .sb-full { display: none; }
+      .sticky-bar .sb-compact { display: inline; }
+    }
+
     .hero {
       color: #fffaf1;
       background:
         linear-gradient(90deg, rgba(17, 39, 37, .95), rgba(17, 39, 37, .78) 46%, rgba(17, 39, 37, .2)),
-        url("https://upload.wikimedia.org/wikipedia/commons/5/55/Palacio_de_Bellas_Artes_%2839701059255%29.jpg") center/cover;
-      min-height: 92vh;
+        url("https://static.wixstatic.com/media/5a2b1a_dd39363c1c074d92a189d97bbc86fecc~mv2.png/v1/fit/w_1920,h_1920,q_82,enc_auto/hero-bellas-artes.png") center/cover;
+      min-height: 94vh;
       display: grid;
       align-items: end;
       position: relative;
@@ -146,7 +187,7 @@
     }
     h1 {
       max-width: 820px;
-      margin: 20px 0 0;
+      margin: 18px 0 0;
       font-family: Fraunces, Georgia, "Times New Roman", serif;
       font-size: clamp(54px, 8vw, 112px);
       line-height: .88;
@@ -154,9 +195,17 @@
       letter-spacing: 0;
       text-wrap: balance;
     }
+    .hero-tagline {
+      margin: 22px 0 0;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(20px, 2.3vw, 30px);
+      font-weight: 500;
+      color: var(--maize);
+      line-height: 1.18;
+    }
     .hero-copy {
       max-width: 710px;
-      margin: 28px 0 0;
+      margin: 18px 0 0;
       color: rgba(255, 250, 241, .84);
       font-size: clamp(18px, 1.5vw, 22px);
       line-height: 1.58;
@@ -174,6 +223,31 @@
     .signal p { margin: 14px 0 0; color: rgba(255,250,241,.76); line-height: 1.5; }
     .signal-list { margin-top: 18px; display: grid; gap: 10px; color: rgba(255,250,241,.82); font-size: 14px; }
     .signal-list span { padding-top: 10px; border-top: 1px solid rgba(251,244,231,.2); }
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,250,241,.7);
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .scroll-cue:after {
+      content: "";
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(180deg, var(--maize), transparent);
+      animation: cue 2.4s ease-in-out infinite;
+      transform-origin: top;
+    }
+    @keyframes cue { 0%,100% { opacity: .3; transform: scaleY(.5); } 50% { opacity: 1; transform: scaleY(1); } }
+
     section { padding: 72px 0; }
     section:not(.hero) {
       position: relative;
@@ -282,6 +356,68 @@
     .texture-card:nth-child(3) { border-top-color: var(--maize); }
     .texture-card b { display: block; color: var(--nopal); }
     .texture-card p { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+    /* Host section */
+    .host {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 52px;
+      align-items: stretch;
+    }
+    .host-frame {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      min-height: 440px;
+      border: 6px solid #fffaf1;
+      outline: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 30% 22%, rgba(242,169,31,.35), transparent 55%),
+        linear-gradient(150deg, var(--nopal), var(--cacao) 70%, #2a1a14);
+      display: grid;
+      align-content: space-between;
+      padding: 28px;
+      color: #fffaf1;
+    }
+    .host-frame .corner { position: absolute; inset: 14px; border: 1px solid rgba(255,250,241,.28); border-radius: 6px; pointer-events: none; }
+    .host-mono {
+      align-self: center;
+      justify-self: center;
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 650;
+      font-size: 120px;
+      line-height: 1;
+      letter-spacing: -.02em;
+      background: linear-gradient(180deg, #fff, var(--maize));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,.3));
+    }
+    .host-frame .tag { position: relative; z-index: 1; }
+    .host-frame .tag b { display: block; font-family: Fraunces, Georgia, serif; font-size: 24px; font-weight: 500; }
+    .host-frame .tag span { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--maize); }
+    .host-copy { align-self: center; }
+    .host-copy .host-quote {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.12;
+      font-weight: 500;
+      color: var(--ink);
+      margin: 16px 0 0;
+      text-wrap: balance;
+    }
+    .host-copy p { color: var(--muted); margin: 18px 0 0; }
+    .signature {
+      margin-top: 22px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 30px;
+      color: var(--cantera);
+      font-weight: 500;
+    }
+    .signature small { display: block; font-family: Outfit, sans-serif; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
     .dark {
       color: #fffaf1;
       background:
@@ -342,6 +478,46 @@
     }
     .rhythm b { display: block; color: var(--maize); }
     .rhythm p { margin: 7px 0 0; color: rgba(255,250,241,.72); font-size: 14px; line-height: 1.48; }
+
+    /* Food gallery / The table */
+    .feast { background:
+        radial-gradient(circle at 85% 8%, rgba(242,169,31,.16), transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(190,47,107,.1), transparent 42%); }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 168px;
+      gap: 14px;
+      margin-top: 34px;
+    }
+    figure.dish {
+      position: relative;
+      margin: 0;
+      grid-column: span 2;
+      grid-row: span 1;
+      border-radius: 9px;
+      overflow: hidden;
+      border: 5px solid #fffaf1;
+      outline: 1px solid var(--line);
+      box-shadow: 0 14px 38px rgba(17,39,37,.1);
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1), box-shadow .4s ease;
+    }
+    figure.dish.wide { grid-column: span 3; }
+    figure.dish.tall { grid-row: span 2; }
+    figure.dish:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(17,39,37,.18); z-index: 2; }
+    figure.dish img { filter: saturate(1.08) contrast(1.02); transition: transform .8s cubic-bezier(.16, 1, .3, 1), filter .6s ease; }
+    figure.dish:hover img { transform: scale(1.07); filter: saturate(1.18) contrast(1.05); }
+    figure.dish figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 26px 16px 13px;
+      color: #fffaf1;
+      background: linear-gradient(0deg, rgba(13,24,21,.92), rgba(13,24,21,.45) 55%, transparent);
+    }
+    figure.dish figcaption b { display: block; font-family: Fraunces, Georgia, serif; font-size: 18px; font-weight: 500; letter-spacing: .005em; }
+    figure.dish figcaption span { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,250,241,.8); line-height: 1.35; }
+    .gallery-note { margin-top: 22px; color: var(--muted); font-size: 14px; font-style: italic; }
+
     .landmark-section {
       position: relative;
       background:
@@ -456,13 +632,15 @@
     .texture-card,
     .date-card,
     .rhythm div,
-    .signal {
+    .signal,
+    .practical-card {
       transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease;
     }
     .panel:hover,
     .fit-card:hover,
     .texture-card:hover,
-    .date-card:hover {
+    .date-card:hover,
+    .practical-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 18px 54px rgba(17,39,37,.12);
     }
@@ -471,6 +649,29 @@
     ul { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
     li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--muted); line-height: 1.45; }
     li:before { content: ""; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--cantera); }
+
+    /* Know before you go */
+    .practical-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .practical-card {
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--turquesa);
+      border-radius: 8px;
+      padding: 22px;
+      background: rgba(255,250,241,.84);
+      box-shadow: 0 12px 32px rgba(17,39,37,.06);
+    }
+    .practical-card:nth-child(2) { border-top-color: var(--cempasuchil); }
+    .practical-card:nth-child(3) { border-top-color: var(--bugambilia); }
+    .practical-card:nth-child(4) { border-top-color: var(--nopal); }
+    .practical-card .ico { font-family: Fraunces, Georgia, serif; font-size: 30px; font-weight: 650; color: var(--cantera); line-height: 1; }
+    .practical-card b { display: block; margin-top: 12px; color: var(--nopal); font-size: 18px; }
+    .practical-card p { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+
     .fit-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -485,21 +686,95 @@
     }
     .fit-card b { display: block; color: var(--nopal); font-size: 19px; }
     .fit-card p { margin: 10px 0 0; color: var(--muted); font-size: 15px; line-height: 1.58; }
+
+    /* Investment */
+    .invest-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 30px;
+      align-items: center;
+      border: 1px solid rgba(251,244,231,.24);
+      border-radius: 12px;
+      padding: 40px;
+      background:
+        radial-gradient(circle at 88% 14%, rgba(242,169,31,.18), transparent 46%),
+        linear-gradient(135deg, #13312b, #1f4f44 58%, #4b3026);
+      color: #fffaf1;
+      box-shadow: var(--shadow);
+    }
+    .invest-wrap h2 { margin-top: 10px; }
+    .invest-wrap p { color: rgba(255,250,241,.82); }
+    .invest-side {
+      border-left: 1px solid rgba(255,250,241,.18);
+      padding-left: 30px;
+    }
+    .invest-side .price { font-family: Fraunces, Georgia, serif; font-size: clamp(30px, 3.4vw, 44px); font-weight: 500; line-height: 1.05; }
+    .invest-side .price small { display: block; font-family: Outfit, sans-serif; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--maize); margin-bottom: 8px; }
+    .invest-side p { font-size: 14px; color: rgba(255,250,241,.74); margin: 14px 0 0; }
+    .invest-side .hero-actions { margin-top: 22px; }
+    @media (max-width: 860px) { .invest-wrap { grid-template-columns: 1fr; padding: 30px; } .invest-side { border-left: 0; border-top: 1px solid rgba(255,250,241,.18); padding-left: 0; padding-top: 26px; } }
+
+    /* FAQ */
+    .faq-list { margin-top: 30px; display: grid; gap: 12px; }
+    details.faq-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255,250,241,.84);
+      overflow: hidden;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    details.faq-item[open] { border-color: var(--cantera); box-shadow: 0 16px 40px rgba(17,39,37,.1); }
+    details.faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(18px, 1.9vw, 23px);
+      font-weight: 500;
+      color: var(--ink);
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary .plus {
+      margin-left: auto;
+      flex: 0 0 auto;
+      width: 26px; height: 26px;
+      position: relative;
+      border-radius: 50%;
+      border: 1.5px solid var(--cantera);
+      transition: transform .3s ease, background .3s ease;
+    }
+    details.faq-item summary .plus:before,
+    details.faq-item summary .plus:after {
+      content: ""; position: absolute; inset: 0; margin: auto;
+      background: var(--cantera); border-radius: 2px;
+    }
+    details.faq-item summary .plus:before { width: 11px; height: 1.5px; }
+    details.faq-item summary .plus:after { width: 1.5px; height: 11px; transition: transform .3s ease; }
+    details.faq-item[open] summary .plus { background: var(--active-soft); transform: rotate(135deg); }
+    details.faq-item .answer { padding: 0 22px 22px 22px; color: var(--muted); }
+    details.faq-item .answer p { margin: 0; }
+
     .cta {
       text-align: center;
       color: #fffaf1;
       background:
         linear-gradient(rgba(17,39,37,.7), rgba(17,39,37,.85)),
-        url("https://upload.wikimedia.org/wikipedia/commons/e/e3/Trajinera_de_Xochimilco_-_Ciudad_de_M%C3%A9xico.jpg") center/cover;
+        url("https://static.wixstatic.com/media/5a2b1a_8fcc6056b51f4ea581a8d94d8ce214d0~mv2.png/v1/fit/w_1920,h_1920,q_82,enc_auto/festival-night.png") center/cover;
     }
     .cta h2 { margin-inline: auto; max-width: 860px; }
     .cta p { max-width: 720px; margin: 24px auto 0; color: rgba(255,250,241,.84); }
     footer { padding: 30px 0 54px; color: var(--muted); font-size: 13px; }
     @media (max-width: 980px) {
-      .hero-inner, .intro, .section-head, .area, .area:nth-child(even), .included, .fit-grid { grid-template-columns: 1fr; }
+      .hero-inner, .intro, .section-head, .area, .area:nth-child(even), .included, .fit-grid, .host { grid-template-columns: 1fr; }
       .area:nth-child(even) .photo { order: 0; }
       .dates, .texture-grid { grid-template-columns: 1fr; }
-      .rhythm { grid-template-columns: repeat(2, 1fr); }
+      .rhythm, .practical-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 150px; }
+      figure.dish.wide { grid-column: span 2; }
+      .host-frame { min-height: 320px; }
       .hero { min-height: 820px; }
       .hero-inner { padding-bottom: 90px; }
     }
@@ -511,36 +786,55 @@
       .scroll-aura { width: 5px; opacity: .55; }
       .landmark-canvas { opacity: .24; }
       h1 { font-size: clamp(46px, 14vw, 70px); }
-      .area-details, .rhythm { grid-template-columns: 1fr; }
-      .panel, .signal, .date-card, .fit-card { padding: 22px; }
+      .area-details, .rhythm, .practical-grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
+      figure.dish, figure.dish.wide, figure.dish.tall { grid-column: span 1; grid-row: span 1; }
+      .host-mono { font-size: 88px; }
+      .panel, .signal, .date-card, .fit-card, .practical-card { padding: 22px; }
       .button { width: 100%; }
+      .sticky-bar .button { width: auto; }
     }
     @media (prefers-reduced-motion: no-preference) {
-      .reveal {
+      .js .reveal {
         opacity: .001;
         transform: translateY(22px);
         transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
       }
-      .reveal.is-visible {
+      .js .reveal.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
     }
   </style>
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
   <div class="scroll-aura" aria-hidden="true"></div>
+
+  <div class="sticky-bar" id="stickyBar" aria-hidden="true">
+    <div class="sticky-inner">
+      <span class="mark"><span class="sb-full">Mexico City Food Tour 2026</span><span class="sb-compact">Mexico City 2026</span></span>
+      <div class="sticky-meta">
+        <span>November 15 to 20</span>
+        <span>Five nights, four full days</span>
+        <span>Eight spots only</span>
+      </div>
+      <a class="button primary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026"><span class="sb-full">Request Your Spot</span><span class="sb-compact">Reserve</span></a>
+    </div>
+  </div>
+
   <main>
     <section class="hero" data-tone="nopal">
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
       <div class="wrap hero-inner">
         <div>
-          <p class="eyebrow">Private invitation · Mexico City</p>
+          <p class="eyebrow">Private invitation · Mexico City · November 2026</p>
           <h1>Mexico City Food Tour 2026</h1>
+          <p class="hero-tagline">Five nights. Four full days. One very full heart.</p>
           <p class="hero-copy">Arrive Sunday evening, November 15, 2026, for a welcome reception and full tour briefing. Spend four hosted days moving through markets, landmark neighborhoods, celebrated kitchens, street food, coffee, canals, museums, and late-table conversation, then close with brunch on Friday, November 20 as Corona Capital weekend begins.</p>
           <div class="hero-actions">
             <a class="button primary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026">Request Your Spot</a>
-            <a class="button secondary" href="#itinerary">View The Flow</a>
+            <a class="button secondary" href="#table">See What You Will Eat</a>
           </div>
         </div>
         <aside class="signal" aria-label="Tour availability">
@@ -554,17 +848,18 @@
           </div>
         </aside>
       </div>
+      <span class="scroll-cue" aria-hidden="true">Scroll</span>
     </section>
 
     <section data-tone="maize">
       <div class="wrap intro">
         <div>
-          <p class="eyebrow">Hosted by Jon Orozco</p>
+          <p class="eyebrow">The invitation</p>
           <h2>Not a checklist tour. A hosted way into the city.</h2>
         </div>
         <div>
           <p class="lead">This is a small-group food experience built around the way Mexico City actually opens itself up: one neighborhood, one table, one market stall, one late-night bite, and one beautiful surprise at a time.</p>
-          <p>Raised between Mexican agricultural roots and migrant farm life in Washington state, Jon brings a personal connection to the food, labor, hospitality, and regional traditions behind every meal. Expect deep hospitality, honest recommendations, enough structure to relax, and enough surprise to make the trip feel alive.</p>
+          <p>You will taste the city across markets, historic plazas, neighborhood kitchens, street corridors, coffee counters, canals, rooftops, and polished dining rooms. The pace is full, the logistics are handled, and the point is simple: arrive curious and leave well-fed.</p>
           <div class="texture-grid" aria-label="Tour principles">
             <div class="texture-card">
               <b>Food first</b>
@@ -572,7 +867,7 @@
             </div>
             <div class="texture-card">
               <b>Culture with context</b>
-              <p>Landmarks are not scenery. They anchor the route: Bellas Artes, Casa Azul, Xochimilco, Reforma, and Soumaya.</p>
+              <p>Landmarks are not scenery. They anchor the route: Bellas Artes, the Palacio Postal, Templo Mayor, Xochimilco, Chapultepec, and the Gran Hotel.</p>
             </div>
             <div class="texture-card">
               <b>Small and personal</b>
@@ -581,6 +876,28 @@
           </div>
           <div class="heritage-strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
           <div class="privacy"><strong>Private page note:</strong> this invitation page is intentionally unlisted and marked noindex. Please do not share it broadly.</div>
+        </div>
+      </div>
+    </section>
+
+    <section data-tone="cantera">
+      <div class="wrap">
+        <p class="eyebrow">Hosted by Jon Orozco</p>
+        <div class="host" style="margin-top:18px">
+          <!-- HOST PHOTO: to use a real photo of Jon, replace the .host-frame block below with:
+               <div class="host-frame" style="padding:0"><img alt="Jon Orozco, host of the Mexico City food tour" src="YOUR_PHOTO_URL"></div> -->
+          <figure class="host-frame" aria-label="Jon Orozco, your host">
+            <span class="corner" aria-hidden="true"></span>
+            <div class="tag"><b>Jon Orozco</b><span>Your host</span></div>
+            <span class="host-mono" aria-hidden="true">JO</span>
+            <div class="tag" style="text-align:right"><span>Mexico City · 2026</span></div>
+          </figure>
+          <div class="host-copy">
+            <p class="host-quote">"I am not handing you a brochure. I am handing you a table, and a city I love."</p>
+            <p>Raised between Mexican agricultural roots and migrant farm life in Washington state, Jon brings a personal connection to the food, labor, hospitality, and regional traditions behind every meal. His professional life has centered on people, culture, and strategy. This tour is the personal side of that same work: gathering good people around good food and helping them experience Mexico with more context, warmth, and confidence.</p>
+            <p>Expect deep hospitality, honest recommendations, enough structure to relax, and enough surprise to keep the week feeling alive.</p>
+            <p class="signature">Jon Orozco<small>Host · Verk Vibe</small></p>
+          </div>
         </div>
       </div>
     </section>
@@ -629,9 +946,68 @@
         <div class="rhythm" aria-label="Daily rhythm">
           <div><b>Morning</b><p>Coffee, pan dulce, mercados, and neighborhood starts before the city gets loud.</p></div>
           <div><b>Midday</b><p>Landmark walks, museums, tacos, tostadas, tortas, and regional specialties.</p></div>
-          <div><b>Evening</b><p>Longer dinners, mezcal, cocktail stops, and the kind of tables that turn into stories.</p></div>
+          <div><b>Evening</b><p>Longer dinners, tequila, cocktail stops, and the kind of tables that turn into stories.</p></div>
           <div><b>Between</b><p>Short rests, transit support, optional wandering, and space to enjoy where you are.</p></div>
         </div>
+      </div>
+    </section>
+
+    <section id="table" class="feast" data-tone="cantera">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">What you will actually eat</p>
+            <h2>The table is the whole point.</h2>
+          </div>
+          <p>Tacos al pastor shaved off the trompo. Mole with real depth. Tlacoyos and quesadillas off the comal. Conchas and churros with coffee. Tequila as the pour of the week, mezcal if you want it, and mocktails for anyone keeping it zero proof. This is range, not a single tasting menu.</p>
+        </div>
+        <div class="gallery">
+          <figure class="dish wide tall">
+            <img loading="lazy" alt="Tacos al pastor shaved from the trompo, a Mexico City street food classic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tacos_al_pastor.jpg/1280px-Tacos_al_pastor.jpg">
+            <figcaption><b>Tacos al pastor</b><span>Marinated pork off the trompo, pineapple, cilantro, salsa</span></figcaption>
+          </figure>
+          <figure class="dish tall">
+            <img loading="lazy" alt="Mole poblano, a deep and complex Mexican sauce" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Mole_poblano.jpg">
+            <figcaption><b>Mole</b><span>Layered, slow, and regional</span></figcaption>
+          </figure>
+          <figure class="dish wide">
+            <img loading="lazy" alt="The dim, designed cocktail bar where the group gathers in the evening" src="https://static.wixstatic.com/media/5a2b1a_83e4863ceeef4e68a1a311258028e837~mv2.png/v1/fit/w_1500,h_1500,q_82,enc_auto/cocktail-bar.png">
+            <figcaption><b>The bar</b><span>Tequila is the show, mezcal if you want it, mocktails poured all night</span></figcaption>
+          </figure>
+          <figure class="dish">
+            <img loading="lazy" alt="Conchas, classic Mexican sweet bread" src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Conchas.jpg">
+            <figcaption><b>Pan dulce</b><span>Morning conchas</span></figcaption>
+          </figure>
+          <figure class="dish wide">
+            <img loading="lazy" alt="Esquites, Mexican street corn served in a cup" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Esquites.jpg/1280px-Esquites.jpg">
+            <figcaption><b>Esquites and elote</b><span>Street corn, lime, chile, cheese</span></figcaption>
+          </figure>
+          <figure class="dish">
+            <img loading="lazy" alt="Tlacoyos, a traditional Mexican antojito" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Tlacoyos.jpg">
+            <figcaption><b>Tlacoyos</b><span>Off the comal</span></figcaption>
+          </figure>
+          <figure class="dish">
+            <img loading="lazy" alt="Churros, fried dough dusted with sugar" src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Churros.jpg">
+            <figcaption><b>Churros</b><span>With thick chocolate</span></figcaption>
+          </figure>
+          <figure class="dish wide">
+            <img loading="lazy" alt="Chilaquiles verdes, a classic Mexican brunch dish" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Chilaquiles_verdes.jpg/1280px-Chilaquiles_verdes.jpg">
+            <figcaption><b>Chilaquiles</b><span>The closing-brunch kind of plate</span></figcaption>
+          </figure>
+          <figure class="dish">
+            <img loading="lazy" alt="Cafe de olla, traditional Mexican spiced coffee" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Caf%C3%A9_de_olla.jpg/1280px-Caf%C3%A9_de_olla.jpg">
+            <figcaption><b>Cafe de olla</b><span>Cinnamon and piloncillo</span></figcaption>
+          </figure>
+          <figure class="dish">
+            <img loading="lazy" alt="Bright aguas frescas in several flavors, also served as mocktails" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Aguas_frescas.jpg/1280px-Aguas_frescas.jpg">
+            <figcaption><b>Aguas frescas and mocktails</b><span>Zero proof, full flavor</span></figcaption>
+          </figure>
+          <figure class="dish wide">
+            <img loading="lazy" alt="Quesadilla de flor de calabaza, squash blossom quesadilla" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Quesadilla_de_flor_de_calabaza.jpg">
+            <figcaption><b>Quesadilla de flor de calabaza</b><span>Squash blossom, off the comal</span></figcaption>
+          </figure>
+        </div>
+        <p class="gallery-note">Dishes shown are representative of the kind of eating this trip is built around. Exact menus shift with the season, the market, and the day.</p>
       </div>
     </section>
 
@@ -643,43 +1019,43 @@
             <p class="eyebrow">Landmark arc and table culture</p>
             <h2>The city in full color: plazas, murals, canals, castles, and museums.</h2>
           </div>
-          <p>Each route pairs a recognized Mexico City landmark with the food and neighborhood life around it. The page now follows a cleaner cultural arc: civic power, ancient roots, major artwork, living agriculture, parkland grandeur, contemporary design, and the meals that make it all feel human.</p>
+          <p>Each route pairs a recognized Mexico City landmark with the food and neighborhood life around it. The page follows a clear cultural arc: civic power, ancient roots, major artwork, living agriculture, parkland grandeur, contemporary design, and the meals that make it all feel human.</p>
         </div>
         <div class="areas">
           <article class="area">
-            <div class="photo"><img alt="Palacio Nacional on the Zocalo in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Nacional_from_NE_corner_of_Zocalo%2C_Mexico_City.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Gilded ironwork staircase inside the Palacio Postal in Mexico City's historic center" src="https://static.wixstatic.com/media/5a2b1a_02806f33678344e9b7587b3446ac0dc6~mv2.png/v1/fit/w_1500,h_1500,q_82,enc_auto/centro-palacio-postal.png"></div>
             <div class="area-copy">
-              <h3>Zocalo and Palacio Nacional</h3>
-              <p>The Zocalo is the formal heart of the city, the vast civic plaza facing Palacio Nacional, where the president's offices are located. It is also one of the clearest places to feel the layers of Mexico City at once: Indigenous capital, colonial seat, modern republic, public ceremony, protest, and everyday movement.</p>
-              <p>The food route around Centro Historico should feel elevated and grounded at the same time: cathedral views, old portals, classic sweets, market energy, coffee, and the sense that every block has hosted power, labor, lunch, art, and celebration.</p>
+              <h3>Centro Historico and the Palacio Postal</h3>
+              <p>The historic center stacks ancient, colonial, and modern Mexico into a few unforgettable blocks. The Palacio Postal, still a working post office, is one of its quiet showstoppers: gilded ironwork, marble, and a staircase that stops you mid-step.</p>
+              <p>The food route here is elevated and grounded at the same time. Cathedral views, old portals, classic sweets, market energy, coffee, and the sense that every block has hosted power, labor, lunch, and celebration.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Zocalo, Palacio Nacional, Metropolitan Cathedral, and old-city portals</span></div>
+                <div class="detail"><b>Landmark</b><span>Palacio Postal, the Zocalo, Metropolitan Cathedral, and old-city portals</span></div>
                 <div class="detail"><b>Food lens</b><span>Classic sweets, cantina-style bites, market stops, coffee, and street snacks</span></div>
-                <div class="detail"><b>Cultural note</b><span>The plaza is civic, ceremonial, political, and deeply historic</span></div>
+                <div class="detail"><b>Cultural note</b><span>A working post office that doubles as a gilded landmark</span></div>
                 <div class="detail"><b>Pace</b><span>Walkable, layered, and best done with good shoes</span></div>
               </div>
-              <div class="chips"><span>Zocalo</span><span>Palacio Nacional</span><span>Cathedral</span><span>Centro sweets</span></div>
+              <div class="chips"><span>Palacio Postal</span><span>Zocalo</span><span>Cathedral</span><span>Centro sweets</span></div>
             </div>
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Murals inside Palacio de Bellas Artes in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Murales_del_Palacio_de_Bellas_Artes.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Tiffany stained-glass ceiling and iron balconies inside the Gran Hotel Ciudad de Mexico" src="https://static.wixstatic.com/media/5a2b1a_3dab838004194e2badfd59eb1bf179e2~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/gran-hotel-vitral.jpeg"></div>
             <div class="area-copy">
-              <h3>Bellas Artes and the mural tradition</h3>
-              <p>Palacio de Bellas Artes gives the trip a high-art center of gravity: marble, stained glass, Art Nouveau and Art Deco architecture, and monumental murals by the artists who helped define Mexico's visual language in the twentieth century.</p>
-              <p>This is where the page should shine: not with generic luxury, but with cultural richness. The route can pair the grandeur of Bellas Artes with nearby coffee, pastries, old-school dining rooms, and a refined pause before the next neighborhood opens up.</p>
+              <h3>The Gran Hotel and old-city grandeur</h3>
+              <p>A block from the Zocalo, the Gran Hotel Ciudad de Mexico hides one of the most beautiful ceilings in the country: a vast Tiffany stained-glass canopy over wrought-iron balconies and old birdcage elevators.</p>
+              <p>It is the kind of stop that resets the day. A coffee or a long lunch under that glass, then back out into the noise and color of the center, fuller and a little more in awe.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Palacio de Bellas Artes, murals, Alameda Central, and Palacio Postal</span></div>
-                <div class="detail"><b>Food lens</b><span>Coffee, pastry, old Centro dining rooms, sweets, and market detours</span></div>
-                <div class="detail"><b>Art note</b><span>Monumental murals, marble interiors, theater, and national cultural prestige</span></div>
-                <div class="detail"><b>Pace</b><span>Polished, visual, and paced for looking closely</span></div>
+                <div class="detail"><b>Landmark</b><span>The Gran Hotel stained-glass ceiling, balconies, and Zocalo rooftop views</span></div>
+                <div class="detail"><b>Food lens</b><span>Coffee, brunch, old Centro dining rooms, and a refined pause</span></div>
+                <div class="detail"><b>Art note</b><span>Belle Epoque glass, ironwork, and early twentieth-century design</span></div>
+                <div class="detail"><b>Pace</b><span>Polished, calm, and paced for looking up</span></div>
               </div>
-              <div class="chips"><span>Bellas Artes</span><span>Murals</span><span>Palacio Postal</span><span>Alameda</span></div>
+              <div class="chips"><span>Gran Hotel</span><span>Stained glass</span><span>Zocalo views</span><span>Coffee</span></div>
             </div>
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Templo Mayor ruins in the historic center of Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ruinas_del_Templo_Mayor_-_Centro_Hist%C3%B3rico_de_Ciudad_de_M%C3%A9xico.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Templo Mayor archaeological ruins steps from the Zocalo in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_7e81fa0f6c0546649064ecf9b84e68e0~mv2.png/v1/fit/w_1500,h_1500,q_82,enc_auto/templo-mayor.png"></div>
             <div class="area-copy">
               <h3>Templo Mayor and ancient Mexico-Tenochtitlan</h3>
               <p>Just steps from the Zocalo, Templo Mayor changes the scale of the city. It makes clear that Mexico City is not simply colonial architecture and contemporary dining; it is built over the ceremonial center of Mexico-Tenochtitlan.</p>
@@ -695,23 +1071,23 @@
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Casa Azul Frida Kahlo Museum exterior in Coyoacan Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Casa_Azul.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Coyoacan neighborhood marker with the coyote emblem in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_013ba76b267d4009933aa43c99b0694e~mv2.png/v1/fit/w_1500,h_1500,q_82,enc_auto/coyoacan-sign.png"></div>
             <div class="area-copy">
-              <h3>Coyoacan and Casa Azul</h3>
-              <p>Color, coffee, markets, plazas, and a slower neighborhood rhythm. Coyoacan brings together the public life of the plaza, the intimacy of old residential streets, and the vivid landmark presence of Casa Azul.</p>
-              <p>The food route leans into market grazing and classic neighborhood stops: tostadas, aguas frescas, cafe culture, sweets, and the small decisions that make a day feel delicious without becoming overplanned.</p>
+              <h3>Coyoacan, Casa Azul, and Cafe El Jarocho</h3>
+              <p>Color, coffee, markets, plazas, and a slower neighborhood rhythm. Coyoacan brings together the public life of the plaza, the intimacy of old residential streets, and landmarks like Casa Azul and the much-loved Cafe El Jarocho.</p>
+              <p>The food route leans into market grazing and classic neighborhood stops: tostadas, aguas frescas, churros, cafe culture, and the small decisions that make a day feel delicious without becoming overplanned.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Casa Azul and the historic center of Coyoacan</span></div>
+                <div class="detail"><b>Landmark</b><span>Casa Azul, the Coyoacan plaza, Mercado de Coyoacan, and Cafe El Jarocho</span></div>
                 <div class="detail"><b>Food lens</b><span>Market tostadas, fruit, coffee, churros, and neighborhood classics</span></div>
                 <div class="detail"><b>Art note</b><span>Frida Kahlo, Diego Rivera, domestic color, and artistic pilgrimage</span></div>
                 <div class="detail"><b>Pace</b><span>Gentler, colorful, and built for wandering between bites</span></div>
               </div>
-              <div class="chips"><span>Casa Azul</span><span>Mercado de Coyoacan</span><span>Jardin Centenario</span><span>Cafe stops</span></div>
+              <div class="chips"><span>Coyoacan</span><span>Casa Azul</span><span>Cafe El Jarocho</span><span>Mercado</span></div>
             </div>
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Colorful trajinera boat on the Xochimilco canals in Mexico City" src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Trajinera_de_Xochimilco_-_Ciudad_de_M%C3%A9xico.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Colorful trajinera boats lined up on the Xochimilco canals in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_b73214c73f7446c4a5aeeef350c2f9e1~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/xochimilco-trajineras.jpeg"></div>
             <div class="area-copy">
               <h3>Xochimilco and the chinampa landscape</h3>
               <p>Canals, trajineras, snacks, music, and the living garden history of the city. Xochimilco is bright and communal, but it also carries deep agricultural memory through the chinampa system.</p>
@@ -727,7 +1103,7 @@
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Chapultepec Castle in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Chapultepec_castle_in_Mexico_city.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Chapultepec Castle and its garden fountain in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_97041251aba34f47a36e9300922e4189~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/chapultepec-fountain.jpeg"></div>
             <div class="area-copy">
               <h3>Chapultepec Castle and the Anthropology corridor</h3>
               <p>Chapultepec brings grandeur without losing air: parkland, castle views, national history, and one of the city's most important museum corridors. It gives the trip a more elegant day shape, with room for art, history, and a long meal after the park.</p>
@@ -743,36 +1119,59 @@
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Angel of Independence landmark on Paseo de la Reforma in Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Angel_of_Independence_Mexico_City.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="Large street mural of an Indigenous woman holding an ear of corn in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_210b993d86184aa2bb75740000db97a8~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/mural-roma.jpeg"></div>
             <div class="area-copy">
               <h3>Reforma, Roma, and Condesa</h3>
-              <p>Reforma gives the route a ceremonial spine with the Angel of Independence, while Roma and Condesa bring the human-scale texture: trees, cafes, bookstores, street food, parks, mezcal, design, and the creative energy that makes contemporary Mexico City feel alive.</p>
-              <p>Expect a mix of daytime grazing and polished stops: tacos, bakeries, coffee, small plates, wine bars, and walks that move between monuments, Art Deco facades, green plazas, and busy corners.</p>
+              <p>Reforma gives the route a ceremonial spine, while Roma and Condesa bring the human scale: trees, cafes, bookstores, street food, parks, murals, design, and the creative energy that makes contemporary Mexico City feel alive.</p>
+              <p>Expect a mix of daytime grazing and polished stops: tacos, bakeries, coffee, small plates, tequila and cocktail bars, and walks that move between murals, Art Deco facades, green plazas, and busy corners.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Angel of Independence, Paseo de la Reforma, Parque Mexico, and neighborhood corridors</span></div>
-                <div class="detail"><b>Food lens</b><span>Cafes, bakeries, tacos, wine bars, mezcal, and modern Mexican cooking</span></div>
-                <div class="detail"><b>Cultural note</b><span>A view into the city's design, nightlife, and contemporary creative scene</span></div>
+                <div class="detail"><b>Landmark</b><span>Paseo de la Reforma, Parque Mexico, street murals, and neighborhood corridors</span></div>
+                <div class="detail"><b>Food lens</b><span>Cafes, bakeries, tacos, cocktail bars, tequila, and modern Mexican cooking</span></div>
+                <div class="detail"><b>Cultural note</b><span>The city's design, nightlife, and contemporary creative scene</span></div>
                 <div class="detail"><b>Pace</b><span>Urban, flexible, and ideal for tasting across several stops</span></div>
               </div>
-              <div class="chips"><span>Reforma</span><span>Angel</span><span>Parque Mexico</span><span>Neighborhood walks</span></div>
+              <div class="chips"><span>Reforma</span><span>Roma</span><span>Condesa</span><span>Street murals</span></div>
             </div>
           </article>
 
           <article class="area">
-            <div class="photo"><img alt="Museo Soumaya in Plaza Carso Mexico City" src="https://commons.wikimedia.org/wiki/Special:FilePath/Museo_Soumaya_Plaza.jpg"></div>
+            <div class="photo"><img loading="lazy" alt="The suspended book stacks of the Biblioteca Vasconcelos megalibrary in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_442ea29004e7442f92165421e323987e~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/biblioteca-vasconcelos.jpeg"></div>
             <div class="area-copy">
-              <h3>Polanco, Soumaya, and Jumex</h3>
-              <p>Polanco adds a more refined rhythm: contemporary architecture, design-forward streets, major museum collections, and restaurants where Mexican ingredients can be presented with precision.</p>
-              <p>This is where the food-first thread expands into architecture, service, craft, and the visual drama of Soumaya's sculptural exterior beside Jumex's contemporary art program. High-end, but still warm.</p>
+              <h3>Biblioteca Vasconcelos and modern Mexico City</h3>
+              <p>Mexico City is not only colonial stone and old gold. The Biblioteca Vasconcelos, the megabiblioteca, suspends its stacks in mid-air around a glass spine. It is one of the most striking modern spaces in the country.</p>
+              <p>Stops like this balance the week. Between markets and old plazas you get contemporary architecture, design, and a reminder that the city keeps building forward, not just preserving back.</p>
               <div class="area-details">
-                <div class="detail"><b>Landmark</b><span>Museo Soumaya, Museo Jumex, Plaza Carso, and the Nuevo Polanco museum district</span></div>
-                <div class="detail"><b>Food lens</b><span>Elevated dining, pastry, cocktails, seafood, and regional technique</span></div>
-                <div class="detail"><b>Art note</b><span>Major collections, contemporary art, architecture, and restaurant ambition</span></div>
-                <div class="detail"><b>Pace</b><span>Refined but relaxed, with time to look up between meals</span></div>
+                <div class="detail"><b>Landmark</b><span>Biblioteca Vasconcelos, contemporary architecture, and design landmarks</span></div>
+                <div class="detail"><b>Food lens</b><span>Neighborhood coffee, modern cafes, and nearby market food</span></div>
+                <div class="detail"><b>Art note</b><span>A cathedral of books with a suspended whale skeleton at its center</span></div>
+                <div class="detail"><b>Pace</b><span>Airy, modern, and a change of texture from the old center</span></div>
               </div>
-              <div class="chips"><span>Soumaya</span><span>Jumex</span><span>Elevated dining</span><span>Architecture</span></div>
+              <div class="chips"><span>Vasconcelos</span><span>Modern CDMX</span><span>Architecture</span><span>Design</span></div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feast" data-tone="azul">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Real frames, not stock</p>
+            <h2>The week, in real frames.</h2>
+          </div>
+          <p>Every photo here is from the real Mexico City this tour is built around. No stock, no filler. This is the color, the light, and the streets you will actually walk into.</p>
+        </div>
+        <div class="gallery">
+          <figure class="dish wide tall"><img loading="lazy" alt="Night aerial view of Palacio de Bellas Artes lit up over Mexico City" src="https://static.wixstatic.com/media/5a2b1a_0671e7ca6cbe49739911127d45a1266d~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/night-aerial-bellas-artes.jpeg"><figcaption><b>Bellas Artes by night</b><span>The city from above</span></figcaption></figure>
+          <figure class="dish tall"><img loading="lazy" alt="Deep red colonial wall and doorway on a quiet Mexico City street" src="https://static.wixstatic.com/media/5a2b1a_ecb721c1bf6a4c7aba8d4ff46aa89b2c~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/coyoacan-red-wall.jpeg"><figcaption><b>Old colonial streets</b><span>Color on every block</span></figcaption></figure>
+          <figure class="dish"><img loading="lazy" alt="Colorful alebrije sculpture on a Mexico City street" src="https://static.wixstatic.com/media/5a2b1a_770ea00c158847f78bcc1b3bbb665832~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/alebrije.jpeg"><figcaption><b>Alebrijes</b><span>Mexican folk art</span></figcaption></figure>
+          <figure class="dish"><img loading="lazy" alt="Street ofrenda with marigolds honoring Day of the Dead in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_67c2ffdf84d94e1dbd2aeac9f9a812a2~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/ofrenda.jpeg"><figcaption><b>Ofrenda</b><span>Living traditions</span></figcaption></figure>
+          <figure class="dish tall"><img loading="lazy" alt="The gold logo and sign of Cafe El Jarocho in Coyoacan" src="https://static.wixstatic.com/media/5a2b1a_039e67fcc7c34c44b318dec13da7fcf8~mv2.jpg/v1/fit/w_1500,h_1500,q_82,enc_auto/cafe-el-jarocho.jpg"><figcaption><b>Cafe El Jarocho</b><span>Coyoacan coffee</span></figcaption></figure>
+          <figure class="dish wide"><img loading="lazy" alt="Multi-level independent bookstore with plants in Mexico City" src="https://static.wixstatic.com/media/5a2b1a_b11a744b3c0245a9ad11e4580257de5a~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/bookstore-pendulo.jpeg"><figcaption><b>Bookshop afternoons</b><span>Roma and Condesa</span></figcaption></figure>
+          <figure class="dish tall"><img loading="lazy" alt="Front facade of the Palacio de Bellas Artes under a clear blue sky" src="https://static.wixstatic.com/media/5a2b1a_4aa34f650b1549b8bb4829f532910798~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/bellas-artes-facade.jpeg"><figcaption><b>Bellas Artes</b><span>The marble palace</span></figcaption></figure>
+          <figure class="dish"><img loading="lazy" alt="Art Nouveau stained glass inside Chapultepec Castle" src="https://static.wixstatic.com/media/5a2b1a_e75fb81a8d294acaba3047005b6577ea~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/chapultepec-vitral.jpeg"><figcaption><b>Chapultepec glass</b><span>Castle interiors</span></figcaption></figure>
+          <figure class="dish tall"><img loading="lazy" alt="Bronze statue of Emiliano Zapata inside Chapultepec Castle" src="https://static.wixstatic.com/media/5a2b1a_76a2f666e3d4442b9bac73bf2b4e83e8~mv2.jpeg/v1/fit/w_1500,h_1500,q_82,enc_auto/zapata-statue.jpeg"><figcaption><b>Zapata</b><span>History up close</span></figcaption></figure>
         </div>
       </div>
     </section>
@@ -819,6 +1218,40 @@
       </div>
     </section>
 
+    <section data-tone="azul">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Know before you go</p>
+            <h2>Come ready, and the city does the rest.</h2>
+          </div>
+          <p>A few honest notes so the week feels easy. Share anything you need early, and the planning is built around it.</p>
+        </div>
+        <div class="practical-grid">
+          <div class="practical-card">
+            <span class="ico" aria-hidden="true">01</span>
+            <b>Physical pace</b>
+            <p>Active days with real walking, stairs, markets, and uneven sidewalks. Some days run close to 12,000 steps. Breaks, coffee stops, and seated meals are built in.</p>
+          </div>
+          <div class="practical-card">
+            <span class="ico" aria-hidden="true">02</span>
+            <b>Food needs</b>
+            <p>Allergies, vegetarian, gluten-free, and alcohol-free preferences are honored as best as possible. Share details early. Across markets and small vendors, not every setting can be guaranteed.</p>
+          </div>
+          <div class="practical-card">
+            <span class="ico" aria-hidden="true">03</span>
+            <b>What to bring</b>
+            <p>Comfortable walking shoes, light layers, a small day bag, sunscreen, a portable charger, personal medication, and one nicer outfit for an elevated dinner.</p>
+          </div>
+          <div class="practical-card">
+            <span class="ico" aria-hidden="true">04</span>
+            <b>Language</b>
+            <p>The tour is hosted in English, with Spanish support handled throughout the itinerary. No Spanish required, though a few words are always welcome.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section data-tone="maize">
       <div class="wrap">
         <div class="section-head">
@@ -845,6 +1278,70 @@
       </div>
     </section>
 
+    <section data-tone="nopal">
+      <div class="wrap">
+        <p class="eyebrow">Reserve your spot</p>
+        <div class="invest-wrap" style="margin-top:18px">
+          <div>
+            <h2 style="margin-top:0">A small table fills fast.</h2>
+            <p>Eight guests, one host, one very full week. Pricing covers the hosted program end to end: lodging, the welcome reception, four full tour days, scheduled meals and tastings, planned admissions, local transit support, and the Friday closing brunch.</p>
+            <p>Because the group is small and the page is private, pricing and the reservation deposit are shared by request. Send a note and you will get the full details, the current availability, and the simple steps to hold a spot.</p>
+          </div>
+          <aside class="invest-side">
+            <!-- PRICING: replace the placeholder below with the confirmed 2026 price/deposit, and wire the button to the live 2026 Stripe link once created. -->
+            <div class="price"><small>Investment</small>Shared on request</div>
+            <p>All-inclusive of the hosted program. Deposit holds your spot. Flights, insurance, and Corona Capital tickets are separate.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026%20-%20Pricing%20and%20Reservation">Request Pricing and Hold a Spot</a>
+              <a class="button secondary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026%20-%20Schedule%20a%20Call">Schedule a Call</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section data-tone="cantera">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Questions</p>
+            <h2>The details, answered.</h2>
+          </div>
+          <p>If something is not here, send a note. The fastest way to get specifics is to ask directly.</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>When is the 2026 Mexico City food tour?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>The tour runs from Sunday evening, November 15, 2026 through Friday brunch, November 20, 2026. Plan to arrive in time for the Sunday evening welcome reception.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Why does the tour end on Friday?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>Friday, November 20 is the start of Corona Capital weekend in Mexico City. The tour closes with brunch so guests staying for the festival can transition right into the weekend.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Are Corona Capital tickets included?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>No. Corona Capital tickets are not included unless listed separately in a confirmed package update. The tour is timed as an ideal lead-in for guests who already plan to attend.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>How many spots are available?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>The tour is intentionally small, with eight guest spots. That keeps the group nimble and the hosting personal.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Do I need to speak Spanish?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>No. The tour is hosted in English, with Spanish support handled throughout the itinerary.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Is this a luxury tour?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>It is a premium hosted food experience, not a sealed-off luxury bubble. You will eat across a real range: markets, street vendors, neighborhood favorites, polished restaurants, and a few special stops.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>What should I bring?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>Comfortable walking shoes, light layers, a small day bag, sunscreen, a portable charger, any personal medication, and one nicer outfit for an elevated dinner.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="cta" data-tone="nopal">
       <div class="wrap">
         <p class="eyebrow">The llenito promise</p>
@@ -852,6 +1349,7 @@
         <p>This is a food-first tour, and the goal is not polite sampling. The goal is abundance, range, context, and joy. Come hungry. Leave with stories.</p>
         <div class="hero-actions" style="justify-content:center">
           <a class="button primary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026">Request Your Spot</a>
+          <a class="button secondary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026%20-%20Schedule%20a%20Call">Schedule a Call</a>
         </div>
       </div>
     </section>
@@ -1032,34 +1530,62 @@
 
       render();
     }
+  </script>
 
-    document.querySelectorAll(".section-head, .texture-card, .privacy, .date-card, .rhythm div, .area, .panel, .fit-card, .cta .eyebrow, .cta h2, .cta p, .cta .button").forEach((element, index) => {
+  <script>
+    // Page interactions live in a classic script so they run even if the Three.js module fails to load.
+    const hero = document.querySelector(".hero");
+    document.querySelectorAll(".section-head, .texture-card, .privacy, .host-frame, .host-copy, .date-card, .rhythm div, figure.dish, .area, .panel, .practical-card, .fit-card, .invest-wrap, details.faq-item, .cta .eyebrow, .cta h2, .cta p, .cta .button").forEach((element, index) => {
       element.classList.add("reveal");
       element.style.transitionDelay = `${Math.min(index % 8, 6) * 55}ms`;
     });
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-visible");
-      });
-    }, { threshold: .16, rootMargin: "0px 0px -8% 0px" });
-
-    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".reveal").forEach((element) => {
+    const revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+    const revealInView = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      revealEls.forEach((element) => {
         const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) element.classList.add("is-visible");
+        if (rect.top < vh * 0.94 && rect.bottom > 0) element.classList.add("is-visible");
       });
-    });
+    };
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle("is-lit", entry.isIntersecting);
-        if (entry.isIntersecting) document.body.dataset.tone = entry.target.dataset.tone || "nopal";
-      });
-    }, { threshold: .01, rootMargin: "-20% 0px -20% 0px" });
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: .16, rootMargin: "0px 0px -8% 0px" });
+      revealEls.forEach((element) => revealObserver.observe(element));
 
-    document.querySelectorAll("section[data-tone]").forEach((section) => sectionObserver.observe(section));
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-lit", entry.isIntersecting);
+          if (entry.isIntersecting) document.body.dataset.tone = entry.target.dataset.tone || "nopal";
+        });
+      }, { threshold: .01, rootMargin: "-20% 0px -20% 0px" });
+      document.querySelectorAll("section[data-tone]").forEach((section) => sectionObserver.observe(section));
+    }
+
+    // Failsafe: reveal on scroll/resize/load and after a timeout, so content is never trapped hidden
+    // even if IntersectionObserver is unavailable or throttled inside an embed.
+    revealInView();
+    window.addEventListener("scroll", () => requestAnimationFrame(revealInView), { passive: true });
+    window.addEventListener("resize", () => requestAnimationFrame(revealInView), { passive: true });
+    window.addEventListener("load", revealInView);
+    setTimeout(revealInView, 1600);
+
+    // Sticky reserve bar: reveal after the hero scrolls out of view
+    const stickyBar = document.getElementById("stickyBar");
+    if (stickyBar && hero) {
+      const heroWatcher = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const show = !entry.isIntersecting;
+          stickyBar.classList.toggle("show", show);
+          stickyBar.setAttribute("aria-hidden", show ? "false" : "true");
+        });
+      }, { rootMargin: "-120px 0px 0px 0px" });
+      heroWatcher.observe(hero);
+    }
   </script>
 </body>
 </html>
