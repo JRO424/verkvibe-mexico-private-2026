@@ -408,6 +408,17 @@
       color: transparent;
       filter: drop-shadow(0 10px 30px rgba(0,0,0,.3));
     }
+    .host-portrait {
+      align-self: center;
+      justify-self: center;
+      width: clamp(168px, 58%, 232px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid rgba(255, 250, 241, .94);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(23, 32, 29, .12);
+    }
+    .host-portrait img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.16); }
     .host-frame .tag { position: relative; z-index: 1; }
     .host-frame .tag b { display: block; font-family: Fraunces, Georgia, serif; font-size: 24px; font-weight: 500; }
     .host-frame .tag span { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--maize); }
@@ -897,12 +908,10 @@
       <div class="wrap">
         <p class="eyebrow">Hosted by Jon Orozco</p>
         <div class="host" style="margin-top:18px">
-          <!-- HOST PHOTO: to use a real photo of Jon, replace the .host-frame block below with:
-               <div class="host-frame" style="padding:0"><img alt="Jon Orozco, host of the Mexico City food tour" src="YOUR_PHOTO_URL"></div> -->
           <figure class="host-frame" aria-label="Jon Orozco, your host">
             <span class="corner" aria-hidden="true"></span>
             <div class="tag"><b>Jon Orozco</b><span>Your host</span></div>
-            <span class="host-mono" aria-hidden="true">JO</span>
+            <span class="host-portrait"><img alt="Jon Orozco, host of the Mexico City food tour" src="https://static.wixstatic.com/media/5a2b1a_c8a250807e7f4b4697f7579ced819a50~mv2.jpg/v1/fit/w_600,h_600,q_88,enc_auto/jon-orozco.jpg"></span>
             <div class="tag" style="text-align:right"><span>Mexico City · 2026</span></div>
           </figure>
           <div class="host-copy">
