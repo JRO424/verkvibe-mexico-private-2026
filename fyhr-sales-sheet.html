@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>FYHR — Executive Operator System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2E5575;
+      --blue-mid: #335e83;
+      --blue-deep: #1f3e57;
+      --blue-darker: #16304a;
+      --blue-soft: #eef2f6;
+      --blue-mist: #f4f7fa;
+      --paper: #fafbfc;
+      --ink: #0e1116;
+      --body: #3a4350;
+      --muted: #69727b;
+      --line: #dde2e8;
+      --line-strong: #c8d0d8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: #c8ccd2;
+      background-image:
+        radial-gradient(circle at 50% 30%, #d8dce2, #b8bdc4);
+      color: var(--body);
+      font-family: "Roboto", Arial, "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern", "liga", "calt", "ss01";
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px;
+    }
+    h1, h2, h3, h4, .brand-mark, .price, .currency, .num, .lbl,
+    .eyebrow, .eyebrow-num, .badge, .label, .footer-mark,
+    .header-flair, .brand-tag, .brand-meta, .price-meta, .cta-btn {
+      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    }
+
+    .sheet {
+      width: 816px;
+      height: 1056px;
+      background: #fff;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.6) inset,
+        0 28px 80px rgba(15, 28, 44, .32),
+        0 4px 14px rgba(15, 28, 44, .14);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    /* refined inset frame */
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(46,85,117,.10);
+      pointer-events: none;
+      z-index: 6;
+    }
+    /* corner registration marks (subtle, editorial) */
+    .sheet::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      pointer-events: none;
+      z-index: 6;
+      background-image:
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue));
+      background-repeat: no-repeat;
+      background-size:
+        6px 1px, 1px 6px,
+        6px 1px, 1px 6px,
+        6px 1px, 1px 6px,
+        6px 1px, 1px 6px;
+      background-position:
+        0 0, 0 0,
+        100% 0, 100% 0,
+        0 100%, 0 100%,
+        100% 100%, 100% 100%;
+      opacity: .18;
+    }
+
+    /* ============ SECTION 1 — HEADER BAND ============ */
+    .header {
+      position: relative;
+      background: var(--blue-deep);
+      background-image:
+        radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(80% 80% at 100% 100%, rgba(0,0,0,.18), transparent 60%),
+        linear-gradient(135deg, #355f85 0%, #2E5575 50%, #1c3e5b 100%);
+      color: #fff;
+      padding: 22px 48px 19px;
+      display: grid;
+      grid-template-columns: 178px 1fr;
+      gap: 36px;
+      align-items: center;
+      overflow: hidden;
+    }
+    /* pinstripe texture */
+    .header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 100% 7px;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    /* subtle vertical hairline on the right side */
+    .header::after {
+      content: "";
+      position: absolute;
+      top: 22px; bottom: 22px;
+      right: 48px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,.18), transparent);
+      pointer-events: none;
+    }
+    .header > * { position: relative; z-index: 1; }
+
+    .header-flair {
+      position: absolute;
+      right: 56px;
+      top: 22px;
+      font-size: 7.5px;
+      letter-spacing: 2.8px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .58);
+      z-index: 2;
+      text-transform: uppercase;
+    }
+    .header-flair span { color: #fff; }
+
+    .brand {
+      border-right: 1px solid rgba(255, 255, 255, .22);
+      padding-right: 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand-frame {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, .65);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: #fff;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .brand-frame::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border: 1px solid rgba(255, 255, 255, .18);
+    }
+    .brand-mark {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+    .brand-rule {
+      width: 38px;
+      height: 1px;
+      background: rgba(255, 255, 255, .9);
+      margin: 10px 0 9px;
+      position: relative;
+    }
+    .brand-rule::after {
+      content: "";
+      position: absolute;
+      left: 0; top: 3px;
+      width: 14px; height: 1px;
+      background: rgba(255, 255, 255, .55);
+    }
+    .brand-tag {
+      font-size: 8.8px;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .82);
+      line-height: 1.55;
+      font-weight: 600;
+    }
+    .brand-meta {
+      font-size: 7.2px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .header h1 {
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -.3px;
+      text-wrap: balance;
+    }
+    .header .subhead {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #d2e1ee;
+      margin-top: 8px;
+      letter-spacing: .1px;
+      font-family: "Roboto", sans-serif;
+    }
+    .header .lede {
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, .92);
+      margin-top: 9px;
+      max-width: 560px;
+    }
+    .header .lede strong { color: #fff; font-weight: 600; }
+
+    /* ============ BODY CONTENT ============ */
+    .body-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 48px;
+      position: relative;
+    }
+    .block {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .block:last-child { border-bottom: 0; }
+    .block.tinted {
+      background: var(--blue-mist);
+      margin: 0 -48px;
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .eyebrow-num {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      color: var(--blue-deep);
+      padding: 3px 6px 2px;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      background: #fff;
+      line-height: 1;
+    }
+    .eyebrow {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .eyebrow-bar {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line-strong), transparent);
+    }
+    .sec-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.18;
+      margin-top: 6px;
+      letter-spacing: -.3px;
+    }
+    .sec-title em {
+      font-style: normal;
+      color: var(--blue);
+    }
+    .sec-intro {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-top: 5px;
+      max-width: 660px;
+    }
+
+    /* ============ SECTION 2 — PROBLEM ============ */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px 9px;
+      margin-top: 7px;
+    }
+    .pain {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(20, 30, 45, .015);
+    }
+    .icon-cap {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      background: var(--blue-soft);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-cap svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--blue);
+    }
+    .pain span {
+      font-size: 10.3px;
+      line-height: 1.25;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ============ SECTION 3 — SOLUTION ============ */
+    .sol-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .sol {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 6px;
+      text-align: center;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      box-shadow: 0 1px 0 rgba(20, 30, 45, .015);
+    }
+    .sol.feature {
+      background: var(--blue);
+      background-image: linear-gradient(160deg, #335e83 0%, #2E5575 60%, #1f4262 100%);
+      border-color: var(--blue-deep);
+      box-shadow: 0 2px 6px rgba(20, 50, 80, .14);
+    }
+    .sol.feature .sol-label { color: #fff; }
+    .sol.feature .sol-icon { background: rgba(255, 255, 255, .18); }
+    .sol.feature .sol-icon svg { stroke: #fff; }
+    .sol.feature::after {
+      content: "INCLUDED";
+      position: absolute;
+      top: -6px;
+      right: 6px;
+      font-size: 6.5px;
+      letter-spacing: 1.4px;
+      font-weight: 700;
+      font-family: "Montserrat", sans-serif;
+      color: #fff;
+      background: var(--blue-deep);
+      padding: 2px 5px;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+    .sol-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--blue-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sol-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--blue);
+    }
+    .sol-label {
+      font-size: 9.3px;
+      line-height: 1.2;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .trademark { font-size: 9px; vertical-align: super; color: var(--blue); margin-left: 1px; }
+
+    /* ============ SECTION 4 — WHY EXECUTIVES BUY ============ */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 7px;
+    }
+    .benefit {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 10px 11px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 0 rgba(20, 30, 45, .02);
+    }
+    .benefit::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+    }
+    .benefit-num {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-family: "Montserrat", sans-serif;
+    }
+    .benefit h4 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.22;
+      margin-bottom: 6px;
+      letter-spacing: -.1px;
+    }
+    .benefit ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .benefit li {
+      font-size: 9.4px;
+      line-height: 1.35;
+      color: var(--body);
+      padding-left: 12px;
+      position: relative;
+    }
+    .benefit li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 5px;
+      height: 1.5px;
+      background: var(--blue);
+      border-radius: 1px;
+    }
+
+    /* ============ SECTION 5 + 6 — GUARANTEE & INVESTMENT ============ */
+    .pair {
+      display: grid;
+      grid-template-columns: 1.18fr 1fr;
+      gap: 14px;
+      margin-top: 2px;
+    }
+    .guarantee {
+      position: relative;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      background:
+        linear-gradient(180deg, #f5f9fc, #eef2f6);
+      padding: 13px 78px 13px 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .guarantee::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--blue);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 7px;
+    }
+    .badge svg { width: 13px; height: 13px; stroke: var(--blue); }
+    .guarantee h3 {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+      letter-spacing: -.3px;
+    }
+    .guarantee p {
+      font-size: 10.1px;
+      line-height: 1.5;
+      color: var(--body);
+    }
+    .guarantee p strong { color: var(--ink); font-weight: 700; }
+
+    /* Seal */
+    .seal {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid var(--blue);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(46, 85, 117, .12);
+    }
+    .seal::before {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(46, 85, 117, .25);
+    }
+    .seal-num {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1;
+      letter-spacing: -.5px;
+      position: relative;
+    }
+    .seal-lbl {
+      font-size: 6.5px;
+      letter-spacing: 1.8px;
+      color: var(--blue);
+      font-weight: 700;
+      margin-top: 3px;
+      position: relative;
+    }
+
+    .investment {
+      position: relative;
+      border-radius: 7px;
+      background: var(--blue-deep);
+      background-image:
+        radial-gradient(60% 60% at 0% 0%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(155deg, #34608a, #1c3e5b);
+      color: #fff;
+      padding: 13px 17px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(20, 50, 80, .18);
+    }
+    /* corner ornaments */
+    .investment .corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 0 solid rgba(255, 255, 255, .55);
+      pointer-events: none;
+    }
+    .investment .corner.tl { top: 7px; left: 7px; border-top-width: 1.2px; border-left-width: 1.2px; }
+    .investment .corner.tr { top: 7px; right: 7px; border-top-width: 1.2px; border-right-width: 1.2px; }
+    .investment .corner.bl { bottom: 7px; left: 7px; border-bottom-width: 1.2px; border-left-width: 1.2px; }
+    .investment .corner.br { bottom: 7px; right: 7px; border-bottom-width: 1.2px; border-right-width: 1.2px; }
+    .investment .label {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .8);
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 3px 0 1px;
+    }
+    .currency {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .8);
+      line-height: 1;
+    }
+    .price {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .price-meta {
+      font-size: 7px;
+      letter-spacing: 1.8px;
+      color: rgba(255, 255, 255, .7);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .price-meta span { color: rgba(255, 255, 255, .35); margin: 0 5px; }
+    .incl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 14px;
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid rgba(255, 255, 255, .22);
+    }
+    .incl li {
+      list-style: none;
+      font-size: 9.3px;
+      line-height: 1.3;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .incl svg { flex: 0 0 11px; width: 11px; height: 11px; stroke: #cfe0ee; }
+
+    /* ============ SECTION 7 — CTA FOOTER ============ */
+    .footer {
+      position: relative;
+      background: var(--blue-deep);
+      background-image:
+        radial-gradient(70% 100% at 100% 50%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(135deg, #1c3e5b, #2E5575 55%, #34608a);
+      color: #fff;
+      padding: 15px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      overflow: hidden;
+    }
+    .footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 100% 7px;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .footer > * { position: relative; z-index: 1; }
+    .footer-mark {
+      position: absolute;
+      top: 10px;
+      right: 48px;
+      font-size: 7px;
+      letter-spacing: 2.2px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .42);
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .footer h2 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -.2px;
+    }
+    .footer p {
+      font-size: 10.4px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .88);
+      margin-top: 6px;
+      max-width: 430px;
+    }
+    .cta-btn {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--blue-deep);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      padding: 13px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.6) inset,
+        0 10px 22px rgba(0, 0, 0, .26),
+        0 2px 4px rgba(0,0,0,.18);
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,.5);
+    }
+    .cta-btn .arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .cta-btn .arrow svg { width: 10px; height: 10px; stroke: #fff; }
+
+    /* ============ PRINT ============ */
+    @page { size: 8.5in 11in; margin: 0; }
+    @media print {
+      body { background: #fff; padding: 0; display: block; }
+      .sheet { box-shadow: none; width: 100%; height: 100vh; }
+      .header, .footer, .investment, .sol.feature, .block.tinted, .guarantee {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 860px) {
+      body { padding: 0; background: #fff; }
+      .sheet { width: 100%; height: auto; box-shadow: none; }
+      .sheet::before, .sheet::after { display: none; }
+      .header { grid-template-columns: 1fr; gap: 18px; padding: 26px 24px; }
+      .header-flair { display: none; }
+      .brand { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.26); padding: 0 0 16px; }
+      .body-area { padding: 0 24px; }
+      .block.tinted { margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .sol-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit-grid { grid-template-columns: 1fr 1fr; }
+      .pair { grid-template-columns: 1fr; }
+      .guarantee { padding-right: 17px; }
+      .seal { position: static; transform: none; margin-top: 10px; }
+      .footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+      .footer-mark { position: static; margin-bottom: 10px; }
+      .cta-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+
+    <!-- SECTION 1 — HEADER BAND -->
+    <header class="header">
+      <div class="header-flair">Executive Brief <span>·</span> 01 / 01</div>
+      <div class="brand">
+        <div class="brand-frame">F</div>
+        <div class="brand-mark">FYHR</div>
+        <div class="brand-rule"></div>
+        <div class="brand-tag">Operational<br>Modernization</div>
+        <div class="brand-meta">Confidential</div>
+      </div>
+      <div>
+        <h1>Modernize Your Operations Without Expanding Headcount</h1>
+        <div class="subhead">Help one trusted employee accomplish the work of an entire support team.</div>
+        <p class="lede">Most growing businesses are not struggling because of bad employees. They are struggling under disconnected systems, repetitive administrative work, and operational overload. <strong>FYHR installs modern operational systems</strong> that help your existing team move faster, stay organized, and reduce administrative friction&nbsp;&mdash;&nbsp;without disrupting your business.</p>
+      </div>
+    </header>
+
+    <div class="body-area">
+
+      <!-- SECTION 2 — THE PROBLEM -->
+      <section class="block">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">01</div>
+          <div class="eyebrow">The Problem</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">Your Business Grew. <em>Your Systems Didn&rsquo;t.</em></h2>
+        <div class="pain-grid">
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3 3 0 0 0-4 4l-7 7 3 3 7-7a3 3 0 0 0 4-4l-2 2-2.4-.6-.6-2.4Z"/></svg></span>
+            <span>Too much manual work</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 9h7M8 13h7M8 17h4"/></svg></span>
+            <span>Employees buried in admin tasks</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
+            <span>Reporting takes too long</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span>
+            <span>Leadership constantly following up</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4v1a3.5 3.5 0 0 0 1 6.9V21h6v-6.1a3.5 3.5 0 0 0 1-6.9V7a4 4 0 0 0-4-4z"/><path d="M10 21h4"/></svg></span>
+            <span>Knowledge trapped in people&rsquo;s heads</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12 7 14a3 3 0 0 1-4-4l2-2M15 12l2-2a3 3 0 0 1 4 4l-2 2"/><path d="M9.5 14.5 8 16M16 8l-1.5 1.5"/></svg></span>
+            <span>Teams on disconnected systems</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.2"/><path d="M4.5 19a5.5 5.5 0 0 1 9.5-3.8"/><circle cx="17.5" cy="17.5" r="3"/><path d="m20 20 1.5 1.5"/></svg></span>
+            <span>Hard to find dependable staff</span>
+          </div>
+          <div class="pain">
+            <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13-3l2 2M20 15a8 8 0 0 1-13 3l-2-2"/><path d="M19 4v4h-4M5 20v-4h4"/></svg></span>
+            <span>Burnout from repetitive coordination</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 — THE SOLUTION -->
+      <section class="block tinted">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">02</div>
+          <div class="eyebrow">The Solution</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">The Executive Operator System<span class="trademark">&trade;</span></h2>
+        <p class="sec-intro">A fully configured operational workstation and workflow system that helps one trusted employee dramatically increase output across multiple business functions.</p>
+        <div class="sol-grid">
+          <div class="sol feature">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20l-1.5-2H3.5z"/></svg></span>
+            <span class="sol-label">Premium MacBook Pro</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5M8 13h7M8 16h5"/></svg></span>
+            <span class="sol-label">Prebuilt operational workflows</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h4"/><path d="M12 3v3"/></svg></span>
+            <span class="sol-label">Secure documentation systems</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M12 9.5 14.5 12M9 15h6"/></svg></span>
+            <span class="sol-label">AI-assisted reporting support</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M6 8.4v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3M12 13.4v2.2"/></svg></span>
+            <span class="sol-label">Connected business systems</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M8 15v-3M12 15V9M16 15v-5"/></svg></span>
+            <span class="sol-label">Executive dashboards</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h6v6H6zM14 5h4v4h-4zM14 13h4v6h-4zM6 15h6v4H6z"/><path d="M12 8h2M16 9v4M9 11v4"/></svg></span>
+            <span class="sol-label">Workflow automation</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 4 8l8 4 8-4z"/><path d="M6 10v4c0 1.5 2.7 3 6 3s6-1.5 6-3v-4"/></svg></span>
+            <span class="sol-label">Training &amp; implementation</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 4v16M13 9h3M13 12h3M13 15h2"/></svg></span>
+            <span class="sol-label">Operational playbooks</span>
+          </div>
+          <div class="sol">
+            <span class="sol-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6z"/><path d="m9 11 2 2 4-4"/></svg></span>
+            <span class="sol-label">White-glove setup</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — WHY EXECUTIVES BUY THIS -->
+      <section class="block">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">03</div>
+          <div class="eyebrow">Why Executives Choose FYHR</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">Built for Stability. <em>Designed for Modern Operations.</em></h2>
+        <div class="benefit-grid">
+          <div class="benefit">
+            <div class="benefit-num">I.</div>
+            <h4>Reduce Operational Overload</h4>
+            <ul>
+              <li>Remove repetitive administrative work</li>
+              <li>Free your team for higher-value priorities</li>
+              <li>Lower coordination and follow-up</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <div class="benefit-num">II.</div>
+            <h4>Support Existing Employees</h4>
+            <ul>
+              <li>Strengthen your current team</li>
+              <li>No new hires or added headcount</li>
+              <li>Tools that make good people faster</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <div class="benefit-num">III.</div>
+            <h4>Improve Organizational Clarity</h4>
+            <ul>
+              <li>Centralize documentation and reporting</li>
+              <li>Capture knowledge in shared systems</li>
+              <li>Give leadership clear visibility</li>
+            </ul>
+          </div>
+          <div class="benefit">
+            <div class="benefit-num">IV.</div>
+            <h4>Modernize Without Chaos</h4>
+            <ul>
+              <li>Calm, structured rollout</li>
+              <li>White-glove setup and onboarding</li>
+              <li>No disruption to daily operations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 + 6 — GUARANTEE & INVESTMENT -->
+      <section class="block">
+        <div class="pair">
+          <div class="guarantee">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6z"/><path d="m9 11 2 2 4-4"/></svg>
+              The Guarantee
+            </div>
+            <h3>Operational Confidence Guarantee</h3>
+            <p>If your organization does not identify measurable operational improvements within the first 30 days, <strong>you keep the fully configured MacBook Pro at no additional cost.</strong></p>
+            <div class="seal">
+              <div class="seal-num">30</div>
+              <div class="seal-lbl">Day Promise</div>
+            </div>
+          </div>
+          <div class="investment">
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+            <div class="label">Fixed-Fee Implementation</div>
+            <div class="price-row">
+              <span class="currency">$</span>
+              <span class="price">35,000</span>
+            </div>
+            <div class="price-meta">One Engagement<span>·</span>All-Inclusive</div>
+            <ul class="incl">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hardware included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Full setup included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Team training included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Workflow implementation</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Executive onboarding</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SECTION 7 — CTA FOOTER -->
+    <footer class="footer">
+      <div class="footer-mark">FYHR <span style="opacity:.6">·</span> Confidential <span style="opacity:.6">·</span> Page 01</div>
+      <div>
+        <h2>You do not need to become a tech company.</h2>
+        <p>You need systems that help your people operate with greater clarity, structure, and efficiency.</p>
+      </div>
+      <a class="cta-btn" href="#">
+        Schedule an Executive Discovery Call
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </footer>
+
+  </main>
+</body>
+</html>
