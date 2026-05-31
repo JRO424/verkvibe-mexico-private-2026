@@ -264,7 +264,7 @@
     }
     @keyframes cue { 0%,100% { opacity: .3; transform: scaleY(.5); } 50% { opacity: 1; transform: scaleY(1); } }
 
-    section { padding: 72px 0; }
+    section { padding: 72px 0; scroll-margin-top: 76px; }
     section:not(.hero) {
       position: relative;
       isolation: isolate;
@@ -545,6 +545,124 @@
     figure.dish figcaption span { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,250,241,.8); line-height: 1.35; }
     .gallery-note { margin-top: 22px; color: var(--muted); font-size: 14px; font-style: italic; }
 
+    .prime-section {
+      position: relative;
+      overflow: hidden;
+      color: #fffaf1;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(242,169,31,.26), transparent 34%),
+        radial-gradient(circle at 86% 24%, rgba(190,47,107,.16), transparent 32%),
+        linear-gradient(135deg, #111d19 0%, #183f35 48%, #4b3026 100%);
+    }
+    .prime-section .eyebrow { color: var(--maize); }
+    .prime-section .section-head p { color: rgba(255,250,241,.76); }
+    .prime-section:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background:
+        linear-gradient(120deg, transparent 0 44%, rgba(255,250,241,.18) 45%, transparent 46% 100%),
+        repeating-linear-gradient(90deg, rgba(242,169,31,.28) 0 1px, transparent 1px 34px);
+      mix-blend-mode: screen;
+    }
+    .prime-section > .wrap { position: relative; z-index: 1; }
+    .prime-feature {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 30px;
+      align-items: stretch;
+      margin-top: 28px;
+    }
+    .prime-copy {
+      border: 1px solid rgba(255,250,241,.22);
+      border-radius: 10px;
+      padding: 34px;
+      background: rgba(255,250,241,.075);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 20px 58px rgba(0,0,0,.18);
+    }
+    .prime-copy h3 {
+      color: #fffaf1;
+      font-size: clamp(32px, 4vw, 58px);
+      line-height: .96;
+      margin-top: 14px;
+    }
+    .prime-copy p { color: rgba(255,250,241,.82); }
+    .prime-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .prime-stat {
+      border: 1px solid rgba(255,250,241,.18);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(255,250,241,.08);
+    }
+    .prime-stat b { display: block; color: var(--maize); font-family: Fraunces, Georgia, serif; font-size: 25px; font-weight: 500; line-height: 1; }
+    .prime-stat span { display: block; margin-top: 6px; color: rgba(255,250,241,.7); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .prime-menu {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .prime-menu span {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: rgba(255,250,241,.82);
+      border-top: 1px solid rgba(255,250,241,.14);
+      padding-top: 11px;
+      line-height: 1.45;
+    }
+    .prime-menu b {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: #211710;
+      background: var(--maize);
+      font-size: 12px;
+    }
+    .prime-media {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-auto-rows: 132px;
+      gap: 12px;
+      min-height: 100%;
+    }
+    .prime-shot {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 9px;
+      border: 4px solid rgba(255,250,241,.86);
+      box-shadow: 0 16px 44px rgba(0,0,0,.2);
+      background: #211710;
+    }
+    .prime-shot:nth-child(1) { grid-column: span 3; grid-row: span 2; }
+    .prime-shot:nth-child(2) { grid-column: span 2; grid-row: span 2; }
+    .prime-shot:nth-child(3),
+    .prime-shot:nth-child(4),
+    .prime-shot:nth-child(5) { grid-column: span 1; }
+    .prime-shot:nth-child(6) { grid-column: span 2; }
+    .prime-shot img { filter: saturate(1.12) contrast(1.04); transition: transform .8s cubic-bezier(.16, 1, .3, 1), filter .6s ease; }
+    .prime-shot:hover img { transform: scale(1.06); filter: saturate(1.22) contrast(1.06); }
+    .prime-shot figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 34px 14px 12px;
+      color: #fffaf1;
+      font-size: 12px;
+      font-weight: 800;
+      background: linear-gradient(0deg, rgba(17,29,25,.92), transparent);
+    }
+
     .landmark-section {
       position: relative;
       background:
@@ -785,7 +903,7 @@
     .cta p { max-width: 720px; margin: 24px auto 0; color: rgba(255,250,241,.84); }
     footer { padding: 30px 0 54px; color: var(--muted); font-size: 13px; }
     @media (max-width: 980px) {
-      .hero-inner, .intro, .section-head, .area, .area:nth-child(even), .included, .fit-grid, .host { grid-template-columns: 1fr; }
+      .hero-inner, .intro, .section-head, .area, .area:nth-child(even), .included, .fit-grid, .host, .prime-feature { grid-template-columns: 1fr; }
       .area:nth-child(even) .photo { order: 0; }
       .dates, .texture-grid { grid-template-columns: 1fr; }
       .rhythm, .practical-grid { grid-template-columns: repeat(2, 1fr); }
@@ -802,6 +920,16 @@
       .scroll-aura { width: 5px; opacity: .55; }
       h1 { font-size: clamp(46px, 14vw, 70px); }
       .area-details, .rhythm, .practical-grid { grid-template-columns: 1fr; }
+      .prime-copy { padding: 24px; }
+      .prime-stats { grid-template-columns: 1fr; }
+      .prime-media { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 132px; }
+      .prime-shot,
+      .prime-shot:nth-child(1),
+      .prime-shot:nth-child(2),
+      .prime-shot:nth-child(3),
+      .prime-shot:nth-child(4),
+      .prime-shot:nth-child(5),
+      .prime-shot:nth-child(6) { grid-column: span 1; grid-row: span 1; }
       .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
       figure.dish, figure.dish.wide, figure.dish.tall { grid-column: span 1; grid-row: span 1; }
       .host-mono { font-size: 88px; }
@@ -941,7 +1069,7 @@
             <p>Markets, neighborhoods, restaurants, street food, coffee, canals, museums, and city movement.</p>
             <div class="micro-list">
               <span>Morning coffee or market starts</span>
-              <span>Midday landmark and food routes</span>
+              <span>Midday landmark, food, and Prime Cuts fire-table routes</span>
               <span>Evening dinners, mezcal, or late bites</span>
             </div>
           </article>
@@ -959,7 +1087,7 @@
         <div class="rhythm" aria-label="Daily rhythm">
           <div><b>Morning</b><p>Coffee, pan dulce, mercados, and neighborhood starts before the city gets loud.</p></div>
           <div><b>Midday</b><p>Landmark walks, museums, tacos, tostadas, tortas, and regional specialties.</p></div>
-          <div><b>Evening</b><p>Longer dinners, tequila, cocktail stops, and the kind of tables that turn into stories.</p></div>
+          <div><b>Evening</b><p>Longer dinners, tequila, cocktail stops, and one fire-led Prime Cuts class.</p></div>
           <div><b>Between</b><p>Short rests, transit support, optional wandering, and space to enjoy where you are.</p></div>
         </div>
       </div>
@@ -972,7 +1100,7 @@
             <p class="eyebrow">What you will actually eat</p>
             <h2>The table is the whole point.</h2>
           </div>
-          <p>Tacos al pastor shaved off the trompo. Mole with real depth. Tlacoyos and quesadillas off the comal. Conchas and churros with coffee. Tequila as the pour of the week, mezcal if you want it, and mocktails for anyone keeping it zero proof. This is range, not a single tasting menu.</p>
+          <p>Tacos al pastor shaved off the trompo. Mole with real depth. Tlacoyos and quesadillas off the comal. Conchas and churros with coffee. Tequila as the pour of the week, mezcal if you want it, and mocktails for anyone keeping it zero proof. The new anchor is a private-feeling five-hour Prime Cuts cooking class with fire, smoke, premium beef, and a hands-on table.</p>
         </div>
         <div class="gallery">
           <figure class="dish wide tall">
@@ -1021,6 +1149,46 @@
           </figure>
         </div>
         <p class="gallery-note">Dishes shown are representative of the kind of eating this trip is built around. Exact menus shift with the season, the market, and the day.</p>
+      </div>
+    </section>
+
+    <section id="prime-cuts" class="prime-section" data-tone="maize">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Signature fire table</p>
+            <h2>A five-hour Prime Cuts BBQ cooking class raises the whole week.</h2>
+          </div>
+          <p>This is the premium add that makes the itinerary feel less like a tour and more like an invitation into Mexican table culture: live fire, technique, generous tasting, and a hosted grill academy setting built for conversation.</p>
+        </div>
+        <div class="prime-feature">
+          <article class="prime-copy">
+            <p class="eyebrow">Sociedad Mexicana de Parrilleros inspired</p>
+            <h3>Prime rib, top sirloin, New York, bone marrow, and dessert from the grill.</h3>
+            <p>The experience is modeled on the Prime Cuts format: a practical, interactive cooking session guided by a maestro parrillero, with the group learning technique while tasting the full menu as it comes off the fire.</p>
+            <div class="prime-stats" aria-label="Prime Cuts class highlights">
+              <div class="prime-stat"><b>5 hr</b><span>Fire-led class</span></div>
+              <div class="prime-stat"><b>5</b><span>Featured plates</span></div>
+              <div class="prime-stat"><b>Hands on</b><span>Guided cooking</span></div>
+            </div>
+            <div class="prime-menu" aria-label="Prime Cuts menu">
+              <span><b>01</b>Roasted bone marrow with grilled bread, herb gremolata, garlic, lemon, and chile piquin.</span>
+              <span><b>02</b>Boneless prime rib using reverse-sear technique with a red-wine reduction.</span>
+              <span><b>03</b>Two-inch top sirloin cooked hot and fast with salsa verde and grilled asparagus.</span>
+              <span><b>04</b>New York steak finished with fine-herb compound butter.</span>
+              <span><b>05</b>Grilled pears with honey, cinnamon, and cream cheese for the sweet close.</span>
+            </div>
+          </article>
+          <div class="prime-media" aria-label="Prime Cuts cooking class photos">
+            <figure class="prime-shot"><img loading="lazy" alt="Premium beef resting after live-fire cooking in a Prime Cuts barbecue class" src="https://soyparrillero.mx/cdn/shop/files/F4_132040c4-4ff1-4a02-a6d0-b246040f6566.jpg?v=1779811168"><figcaption>Prime Cuts experience</figcaption></figure>
+            <figure class="prime-shot"><img loading="lazy" alt="Prime Cuts barbecue class table with grilled food and hands-on preparation" src="https://soyparrillero.mx/cdn/shop/files/K_cursos_experiencia_02_180525b1-1c45-4f29-acad-594efd1bb864.jpg?v=1779894785"><figcaption>The fire-table arc</figcaption></figure>
+            <figure class="prime-shot"><img loading="lazy" alt="Grilled premium beef from a Prime Cuts barbecue class" src="https://soyparrillero.mx/cdn/shop/files/F1_92fdcf62-6353-4a1d-a04a-c9172c420d6c.jpg?v=1779811169"><figcaption>Live-fire beef</figcaption></figure>
+            <figure class="prime-shot"><img loading="lazy" alt="Prime Cuts cooking class preparation at the grill" src="https://soyparrillero.mx/cdn/shop/files/F2_842da7cc-638f-48b7-b140-9a26becee136.jpg?v=1779811168"><figcaption>Technique up close</figcaption></figure>
+            <figure class="prime-shot"><img loading="lazy" alt="Prepared plate from the Prime Cuts cooking class" src="https://soyparrillero.mx/cdn/shop/files/F3_cda6af58-eaed-4c47-9686-3ddc301913c7.jpg?v=1779811168"><figcaption>Tasting every plate</figcaption></figure>
+            <figure class="prime-shot"><img loading="lazy" alt="Prime Cuts dessert plate prepared as part of the barbecue class" src="https://soyparrillero.mx/cdn/shop/files/F5_29f2aa9c-0059-4d31-b722-1162dc75f0e6.jpg?v=1779811168"><figcaption>Sweet close</figcaption></figure>
+          </div>
+        </div>
+        <p class="gallery-note" style="color:rgba(255,250,241,.7)">Class details are adapted from the Prime Cuts CDMX Norte format without carrying over its public sale date. Final private-tour timing will be confirmed in the full itinerary.</p>
       </div>
     </section>
 
@@ -1195,18 +1363,19 @@
             <p class="eyebrow">What is handled</p>
             <h2>Clear inclusions, no mystery math.</h2>
           </div>
-          <p>The experience is meant to feel hosted from the moment you arrive. You should know what is covered, what is personal, and where you have freedom to add festival plans or extra city time.</p>
+          <p>The experience is meant to feel hosted from the moment you arrive. You should know what is covered, what is personal, and where you have freedom to add festival plans or extra city time. The Prime Cuts class is now part of the core premium offer.</p>
         </div>
         <div class="included">
           <article class="panel">
             <p class="eyebrow">Included</p>
             <h3>The handled details</h3>
-            <p>The core tour cost is built around lodging, hosted days, scheduled meals, planned tastings, cultural stops, and the shared rhythm of the group.</p>
+            <p>The core tour cost is built around lodging, hosted days, scheduled meals, planned tastings, cultural stops, the Prime Cuts cooking class, and the shared rhythm of the group.</p>
             <ul>
               <li>Five nights of lodging in Mexico City</li>
               <li>Sunday welcome reception with cocktails, bites, introductions, and the full tour briefing</li>
               <li>Four full hosted tour days across markets, landmarks, neighborhoods, restaurants, and cultural stops</li>
               <li>Scheduled meals, snacks, drinks, sweets, coffee, and tastings during hosted programming</li>
+              <li>Special five-hour Prime Cuts BBQ cooking class with guided preparation, tastings, beverages, and a digital recipe guide</li>
               <li>Admission to planned museums, experiences, and cultural stops on the group route</li>
               <li>Planned transportation or local transit support during scheduled activities</li>
               <li>Friday closing brunch before festival weekend begins</li>
@@ -1296,13 +1465,13 @@
         <div class="invest-wrap" style="margin-top:18px">
           <div>
             <h2 style="margin-top:0">A small table fills fast.</h2>
-            <p>Eight guests, one host, one very full week. Pricing covers the hosted program end to end: lodging, the welcome reception, four full tour days, scheduled meals and tastings, planned admissions, local transit support, and the Friday closing brunch.</p>
+            <p>Eight guests, one host, one very full week. Pricing covers the hosted program end to end: lodging, the welcome reception, four full tour days, scheduled meals and tastings, the five-hour Prime Cuts BBQ cooking class, planned admissions, local transit support, and the Friday closing brunch.</p>
             <p>Because the group is small and the page is private, pricing and the reservation deposit are shared by request. Send a note and you will get the full details, the current availability, and the simple steps to hold a spot.</p>
           </div>
           <aside class="invest-side">
             <!-- PRICING: replace the placeholder below with the confirmed 2026 price/deposit, and wire the button to the live 2026 Stripe link once created. -->
             <div class="price"><small>Investment</small>Shared on request</div>
-            <p>All-inclusive of the hosted program. Deposit holds your spot. Flights, insurance, and Corona Capital tickets are separate.</p>
+            <p>All-inclusive of the hosted program, including the Prime Cuts class. Deposit holds your spot. Flights, insurance, and Corona Capital tickets are separate.</p>
             <div class="hero-actions">
               <a class="button primary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026%20-%20Pricing%20and%20Reservation">Request Pricing and Hold a Spot</a>
               <a class="button secondary" href="mailto:Hello@verkvibe.com?subject=Mexico%20City%20Food%20Tour%202026%20-%20Schedule%20a%20Call">Schedule a Call</a>
@@ -1344,7 +1513,11 @@
           </details>
           <details class="faq-item">
             <summary>Is this a luxury tour?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer"><p>It is a premium hosted food experience, not a sealed-off luxury bubble. You will eat across a real range: markets, street vendors, neighborhood favorites, polished restaurants, and a few special stops.</p></div>
+            <div class="answer"><p>It is a premium hosted food experience, not a sealed-off luxury bubble. You will eat across a real range: markets, street vendors, neighborhood favorites, polished restaurants, and a special Prime Cuts BBQ cooking class.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>What is the Prime Cuts class?<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>It is a special five-hour BBQ cooking class built around premium cuts, live-fire technique, guided preparation, beverages, tastings, and a take-home digital recipe guide. Final timing will be confirmed in the private itinerary.</p></div>
           </details>
           <details class="faq-item">
             <summary>What should I bring?<span class="plus" aria-hidden="true"></span></summary>
