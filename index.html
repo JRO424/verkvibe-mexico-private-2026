@@ -626,6 +626,94 @@
     figure.dish figcaption b { display: block; font-family: Fraunces, Georgia, serif; font-size: 18px; font-weight: 500; letter-spacing: .005em; }
     figure.dish figcaption span { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,250,241,.8); line-height: 1.35; }
     .gallery-note { margin-top: 22px; color: var(--muted); font-size: 14px; font-style: italic; }
+    .stop-pop {
+      margin-top: 34px;
+      border: 1px solid rgba(23,32,29,.12);
+      border-radius: 14px;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(242,169,31,.18), transparent 32%),
+        linear-gradient(135deg, rgba(255,250,241,.92), rgba(255,243,223,.78));
+      box-shadow: 0 22px 62px rgba(17,39,37,.1), inset 0 1px 0 rgba(255,255,255,.64);
+    }
+    .stop-pop-head {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+    .stop-pop-head h3 { font-size: clamp(32px, 4vw, 54px); }
+    .stop-pop-head p { color: var(--muted); margin: 0; }
+    .stop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 178px;
+      gap: 12px;
+    }
+    .stop-card {
+      position: relative;
+      grid-column: span 2;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 4px solid #fffaf1;
+      outline: 1px solid rgba(23,32,29,.1);
+      background: #211710;
+      box-shadow: 0 14px 38px rgba(17,39,37,.12);
+      isolation: isolate;
+      transition: transform .32s cubic-bezier(.16, 1, .3, 1), box-shadow .32s ease;
+    }
+    .stop-card:hover { transform: translateY(-3px); box-shadow: 0 24px 62px rgba(17,39,37,.18); }
+    .stop-card img { filter: saturate(1.16) contrast(1.04); transform: scale(1.01); transition: transform .72s cubic-bezier(.16, 1, .3, 1), filter .5s ease; }
+    .stop-card:hover img { transform: scale(1.06); filter: saturate(1.28) contrast(1.06); }
+    .stop-card:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,.18), transparent 16%),
+        linear-gradient(0deg, rgba(13,24,21,.92), rgba(13,24,21,.16) 62%, transparent);
+    }
+    .stop-card:after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      right: 14px;
+      top: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,250,241,.44);
+      background:
+        radial-gradient(circle, rgba(242,169,31,.9) 0 28%, transparent 29%),
+        conic-gradient(from 12deg, rgba(242,169,31,.9), rgba(190,47,107,.7), rgba(31,154,160,.75), rgba(242,169,31,.9));
+      box-shadow: 0 0 28px rgba(242,169,31,.28);
+      opacity: .9;
+    }
+    .stop-card figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 3;
+      padding: 46px 16px 15px;
+      color: #fffaf1;
+    }
+    .stop-card small {
+      display: inline-flex;
+      margin-bottom: 7px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #26170e;
+      background: var(--maize);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .stop-card b { display: block; font-family: Fraunces, Georgia, serif; font-size: 22px; font-weight: 500; line-height: 1.02; }
+    .stop-card span { display: block; margin-top: 5px; color: rgba(255,250,241,.82); font-size: 12px; line-height: 1.35; }
 
     .prime-section {
       position: relative;
@@ -1043,6 +1131,9 @@
       .hero-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .rhythm, .practical-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 150px; }
+      .stop-pop-head { grid-template-columns: 1fr; }
+      .stop-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 160px; }
+      .stop-card { grid-column: span 2; }
       figure.dish.wide { grid-column: span 2; }
       .host-frame { min-height: 320px; }
       .hero { min-height: 820px; }
@@ -1070,6 +1161,9 @@
       .prime-shot:nth-child(5),
       .prime-shot:nth-child(6) { grid-column: span 1; grid-row: span 1; }
       .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
+      .stop-pop { padding: 16px; }
+      .stop-grid { grid-template-columns: 1fr; grid-auto-rows: 180px; }
+      .stop-card { grid-column: span 1; }
       figure.dish, figure.dish.wide, figure.dish.tall { grid-column: span 1; grid-row: span 1; }
       .host-mono { font-size: 88px; }
       .panel, .signal, .date-card, .fit-card, .practical-card { padding: 22px; }
@@ -1312,6 +1406,42 @@
           </figure>
         </div>
         <p class="gallery-note">Dishes shown are representative of the kind of eating this trip is built around. Exact menus shift with the season, the market, and the day.</p>
+        <div id="food-stops" class="stop-pop" aria-label="Selected food stops from Jon's map">
+          <div class="stop-pop-head">
+            <div>
+              <p class="eyebrow">From Jon's map</p>
+              <h3>The stops that make the week feel delicious.</h3>
+            </div>
+            <p>These are the craveable notes pulled from the shared route: barbacoa, masa, seafood, pastries, market bites, and neighborhood coffee. The exact order can shift, but the appetite is the point.</p>
+          </div>
+          <div class="stop-grid">
+            <figure class="stop-card">
+              <img loading="lazy" alt="Barbacoa tacos with consomme, inspired by Rica Barbacoa Capulhuac" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Plato_de_consom%C3%A9_y_tacos_de_barbacoa.jpg">
+              <figcaption><small>Rica Barbacoa Capulhuac</small><b>Barbacoa and consomme</b><span>Slow, rich, warming, and exactly the kind of morning bite that changes the pace of a day.</span></figcaption>
+            </figure>
+            <figure class="stop-card">
+              <img loading="lazy" alt="Fresh ceviche with tostadas, inspired by La Corriente Cevicheria Nais" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Ceviche_de_pescado_con_tostadas.jpg">
+              <figcaption><small>La Corriente</small><b>Ceviche and tostadas</b><span>Bright seafood, lime, crunch, and the Roma seafood stop that keeps the week from getting too heavy.</span></figcaption>
+            </figure>
+            <figure class="stop-card">
+              <img loading="lazy" alt="Mexican menudo stew, inspired by La Pancita de la Roma" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Bowl_of_menudo_stew.jpg">
+              <figcaption><small>La Pancita de la Roma</small><b>Menudo with backbone</b><span>A deep, old-school bowl for guests who want the real thing, not just the polished thing.</span></figcaption>
+            </figure>
+            <figure class="stop-card">
+              <img loading="lazy" alt="Quesadilla de flor de calabaza, inspired by Expendio de Maiz and market masa stops" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Quesadilla_de_flor_de_calabaza.jpg">
+              <figcaption><small>Expendio de Maiz</small><b>Masa, flowers, and the comal</b><span>Maize as craft: tortillas, squash blossom, herbs, and the kind of cooking that looks simple until you taste it.</span></figcaption>
+            </figure>
+            <figure class="stop-card">
+              <img loading="lazy" alt="Conchas and Mexican pastries, inspired by Panaderia Rosetta, Cafe Nin, Emmer, and Patisserie Dominique" src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Conchas.jpg">
+              <figcaption><small>Rosetta · Cafe Nin · Emmer</small><b>Pastry crawl</b><span>Conchas, laminated sweets, coffee, and the softer morning rhythm of Roma and Juarez.</span></figcaption>
+            </figure>
+            <figure class="stop-card">
+              <img loading="lazy" alt="Barbacoa taco with salsa, inspired by Tacos Don Juan and street taco stops" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Barbacoa_taco.jpg">
+              <figcaption><small>Tacos Don Juan</small><b>The taco stop</b><span>Fast, focused, standing-room energy with the kind of salsa decision that becomes a memory.</span></figcaption>
+            </figure>
+          </div>
+          <p class="gallery-note">Photos in this mini-gallery are representative food imagery matched to Jon's shared stops, not a promise of exact plated presentation.</p>
+        </div>
       </div>
     </section>
 
@@ -1719,7 +1849,7 @@
   <script>
     // Page interactions: reveal-on-scroll, sticky reserve bar, section tone shifts. No external or 3D dependencies.
     const hero = document.querySelector(".hero");
-    document.querySelectorAll(".hero-proof span, .section-head, .texture-card, .privacy, .host-frame, .host-copy, .date-card, .rhythm div, figure.dish, .prime-copy, .prime-shot, .prime-note-card, .area, .panel, .practical-card, .fit-card, .invest-wrap, details.faq-item, .cta .eyebrow, .cta h2, .cta p, .cta .button").forEach((element, index) => {
+    document.querySelectorAll(".hero-proof span, .section-head, .texture-card, .privacy, .host-frame, .host-copy, .date-card, .rhythm div, figure.dish, .stop-pop, .stop-card, .prime-copy, .prime-shot, .prime-note-card, .area, .panel, .practical-card, .fit-card, .invest-wrap, details.faq-item, .cta .eyebrow, .cta h2, .cta p, .cta .button").forEach((element, index) => {
       element.classList.add("reveal");
       element.style.transitionDelay = `${Math.min(index % 8, 6) * 55}ms`;
     });
