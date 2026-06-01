@@ -344,7 +344,7 @@
     }
     @keyframes cue { 0%,100% { opacity: .3; transform: scaleY(.5); } 50% { opacity: 1; transform: scaleY(1); } }
 
-    section { padding: 76px 0; scroll-margin-top: 76px; }
+    section { padding: 68px 0; scroll-margin-top: 76px; }
     section:not(.hero) {
       position: relative;
       isolation: isolate;
@@ -588,16 +588,35 @@
     .rhythm p { margin: 7px 0 0; color: rgba(255,250,241,.72); font-size: 14px; line-height: 1.48; }
 
     /* Food gallery / The table */
-    .feast { background:
+    .feast {
+      position: relative;
+      overflow: hidden;
+      background:
         radial-gradient(circle at 85% 8%, rgba(242,169,31,.16), transparent 40%),
         radial-gradient(circle at 10% 90%, rgba(190,47,107,.1), transparent 42%),
-        linear-gradient(180deg, rgba(255,250,241,.28), rgba(255,243,223,.52)); }
+        linear-gradient(180deg, rgba(255,250,241,.28), rgba(255,243,223,.52));
+    }
+    .feast:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(242,169,31,.34) 0 2px, transparent 3px),
+        radial-gradient(circle at 76% 26%, rgba(190,47,107,.24) 0 1.5px, transparent 3px),
+        radial-gradient(circle at 54% 86%, rgba(31,154,160,.22) 0 2px, transparent 4px);
+      background-size: 260px 220px, 340px 260px, 310px 250px;
+      animation: softSparkle 16s linear infinite;
+      mix-blend-mode: multiply;
+    }
+    .feast > .wrap { position: relative; z-index: 1; }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-auto-rows: 168px;
       gap: 14px;
-      margin-top: 34px;
+      margin-top: 26px;
     }
     figure.dish {
       position: relative;
@@ -611,9 +630,21 @@
       box-shadow: 0 14px 38px rgba(17,39,37,.1), inset 0 1px 0 rgba(255,255,255,.24);
       transition: transform .4s cubic-bezier(.16, 1, .3, 1), box-shadow .4s ease;
     }
-    figure.dish.wide { grid-column: span 3; }
+    figure.dish:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(115deg, transparent 0 34%, rgba(255,255,255,.34) 45%, transparent 58% 100%);
+      transform: translateX(-105%);
+      transition: opacity .3s ease, transform .85s cubic-bezier(.16, 1, .3, 1);
+    }
+    figure.dish.wide { grid-column: span 2; }
     figure.dish.tall { grid-row: span 2; }
+    figure.dish:last-child:nth-child(odd) { grid-column: span 4; }
     figure.dish:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(17,39,37,.18); z-index: 2; }
+    figure.dish:hover:after { opacity: .7; transform: translateX(105%); }
     figure.dish img { filter: saturate(1.08) contrast(1.02); transition: transform .8s cubic-bezier(.16, 1, .3, 1), filter .6s ease; }
     figure.dish:hover img { transform: scale(1.07); filter: saturate(1.18) contrast(1.05); }
     figure.dish figcaption {
@@ -625,9 +656,9 @@
     }
     figure.dish figcaption b { display: block; font-family: Fraunces, Georgia, serif; font-size: 18px; font-weight: 500; letter-spacing: .005em; }
     figure.dish figcaption span { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,250,241,.8); line-height: 1.35; }
-    .gallery-note { margin-top: 22px; color: var(--muted); font-size: 14px; font-style: italic; }
+    .gallery-note { margin-top: 16px; color: var(--muted); font-size: 14px; font-style: italic; }
     .stop-pop {
-      margin-top: 34px;
+      margin-top: 26px;
       border: 1px solid rgba(23,32,29,.12);
       border-radius: 14px;
       padding: 24px;
@@ -636,8 +667,22 @@
         radial-gradient(circle at 18% 10%, rgba(242,169,31,.18), transparent 32%),
         linear-gradient(135deg, rgba(255,250,241,.92), rgba(255,243,223,.78));
       box-shadow: 0 22px 62px rgba(17,39,37,.1), inset 0 1px 0 rgba(255,255,255,.64);
+      position: relative;
+      overflow: hidden;
+    }
+    .stop-pop:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .32;
+      background: linear-gradient(118deg, transparent 0 38%, rgba(255,255,255,.38) 45%, transparent 52% 100%);
+      transform: translateX(-80%);
+      animation: panelGlint 8s cubic-bezier(.16, 1, .3, 1) infinite;
     }
     .stop-pop-head {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: .82fr 1.18fr;
       gap: 28px;
@@ -647,6 +692,8 @@
     .stop-pop-head h3 { font-size: clamp(32px, 4vw, 54px); }
     .stop-pop-head p { color: var(--muted); margin: 0; }
     .stop-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-auto-rows: 178px;
@@ -693,6 +740,7 @@
         conic-gradient(from 12deg, rgba(242,169,31,.9), rgba(190,47,107,.7), rgba(31,154,160,.75), rgba(242,169,31,.9));
       box-shadow: 0 0 28px rgba(242,169,31,.28);
       opacity: .9;
+      animation: colorPulse 4.8s ease-in-out infinite;
     }
     .stop-card figcaption {
       position: absolute;
@@ -715,6 +763,21 @@
     }
     .stop-card b { display: block; font-family: Fraunces, Georgia, serif; font-size: 22px; font-weight: 500; line-height: 1.02; }
     .stop-card span { display: block; margin-top: 5px; color: rgba(255,250,241,.82); font-size: 12px; line-height: 1.35; }
+
+    @keyframes softSparkle {
+      0% { background-position: 0 0, 0 0, 0 0; opacity: .18; }
+      50% { opacity: .3; }
+      100% { background-position: 260px 220px, -340px 260px, 310px -250px; opacity: .18; }
+    }
+    @keyframes panelGlint {
+      0%, 46% { transform: translateX(-90%); opacity: 0; }
+      56% { opacity: .32; }
+      72%, 100% { transform: translateX(90%); opacity: 0; }
+    }
+    @keyframes colorPulse {
+      0%, 100% { transform: scale(.96); filter: saturate(1); }
+      50% { transform: scale(1.04); filter: saturate(1.25); }
+    }
 
     .prime-section {
       position: relative;
@@ -1166,6 +1229,7 @@
       .stop-grid { grid-template-columns: 1fr; grid-auto-rows: 180px; }
       .stop-card { grid-column: span 1; }
       figure.dish, figure.dish.wide, figure.dish.tall { grid-column: span 1; grid-row: span 1; }
+      figure.dish:last-child:nth-child(odd) { grid-column: span 2; }
       .host-mono { font-size: 88px; }
       .panel, .signal, .date-card, .fit-card, .practical-card { padding: 22px; }
       .button { width: 100%; }
@@ -1276,7 +1340,6 @@
             </div>
           </div>
           <div class="heritage-strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="privacy"><strong>Private page note:</strong> this invitation page is intentionally unlisted and marked noindex. Please do not share it broadly.</div>
         </div>
       </div>
     </section>
@@ -1362,7 +1425,7 @@
         </div>
         <div class="gallery">
           <figure class="dish wide tall">
-            <img loading="lazy" alt="Tacos al pastor shaved from the trompo, a Mexico City street food classic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tacos_al_pastor.jpg/1280px-Tacos_al_pastor.jpg">
+            <img loading="lazy" alt="A mouthwatering spread of tacos al pastor with onion, cilantro, salsa, and lime" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Tacos_al_Pastor_2.jpg/1280px-Tacos_al_Pastor_2.jpg">
             <figcaption><b>Tacos al pastor</b><span>Marinated pork off the trompo, pineapple, cilantro, salsa</span></figcaption>
           </figure>
           <figure class="dish tall">
@@ -1437,7 +1500,7 @@
               <figcaption><small>Rosetta · Cafe Nin · Emmer</small><b>Pastry crawl</b><span>Conchas, laminated sweets, coffee, and the softer morning rhythm of Roma and Juarez.</span></figcaption>
             </figure>
             <figure class="stop-card">
-              <img loading="lazy" alt="Barbacoa taco with salsa, inspired by Tacos Don Juan and street taco stops" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Barbacoa_taco.jpg">
+              <img loading="lazy" alt="Juicy tacos al pastor with salsa and onion, inspired by Tacos Don Juan and street taco stops" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tacos_Al_Pastor.jpg/1280px-Tacos_Al_Pastor.jpg">
               <figcaption><small>Tacos Don Juan</small><b>The taco stop</b><span>Fast, focused, standing-room energy with the kind of salsa decision that becomes a memory.</span></figcaption>
             </figure>
           </div>
@@ -1493,7 +1556,6 @@
             </div>
           </div>
         </div>
-        <p class="gallery-note" style="color:rgba(255,250,241,.7)">Class details are adapted from the Prime Cuts CDMX Norte format without carrying over its public sale date. Final private-tour timing will be confirmed in the full itinerary.</p>
       </div>
     </section>
 
@@ -1717,7 +1779,7 @@
           <div class="practical-card">
             <span class="ico" aria-hidden="true">01</span>
             <b>Physical pace</b>
-            <p>Active days with real walking, stairs, markets, and uneven sidewalks. Some days run close to 12,000 steps. Breaks, coffee stops, and seated meals are built in.</p>
+            <p>Active days with real walking, stairs, markets, and uneven sidewalks. Some days run close to 15,000 steps (~5 miles). Breaks, coffee stops, and seated meals are built in.</p>
           </div>
           <div class="practical-card">
             <span class="ico" aria-hidden="true">02</span>
