@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>FYHR — AI Readiness 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2E5575;
+      --blue-mid: #335e83;
+      --blue-deep: #1f3e57;
+      --blue-darker: #16304a;
+      --blue-soft: #eef2f6;
+      --gray-bg: #F4F7FA;
+      --gray-bg-2: #eef2f6;
+      --orange: #F59E0B;
+      --orange-deep: #b87206;
+      --orange-soft: #fff5e1;
+      --ink: #0e1116;
+      --body: #3a4350;
+      --muted: #69727b;
+      --line: #dde2e8;
+      --line-strong: #c8d0d8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: #c8ccd2;
+      background-image: radial-gradient(circle at 50% 30%, #d8dce2, #b8bdc4);
+      color: var(--body);
+      font-family: "Roboto", Arial, "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern", "liga", "calt";
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px;
+    }
+    h1, h2, h3, h4, .mono, .stat-num, .price, .eyebrow, .eyebrow-num,
+    .brand-mark, .brand-tag, .brand-meta, .header-flair, .flow-stage,
+    .pillar-num, .pillar h3, .icon-tile h4, .footer-mark, .cta-btn,
+    .principle b, .check-num, .badge, .label, .price-meta {
+      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    }
+
+    .sheet {
+      width: 816px;
+      height: 1056px;
+      background: #fff;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.6) inset,
+        0 28px 80px rgba(15, 28, 44, .32),
+        0 4px 14px rgba(15, 28, 44, .14);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(46,85,117,.10);
+      pointer-events: none;
+      z-index: 6;
+    }
+    .sheet::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      pointer-events: none;
+      z-index: 6;
+      background-image:
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue)),
+        linear-gradient(var(--blue), var(--blue));
+      background-repeat: no-repeat;
+      background-size: 6px 1px,1px 6px,6px 1px,1px 6px,6px 1px,1px 6px,6px 1px,1px 6px;
+      background-position: 0 0,0 0,100% 0,100% 0,0 100%,0 100%,100% 100%,100% 100%;
+      opacity: .18;
+    }
+
+    /* ============ HEADER + HERO COMBINED ============ */
+    .hero {
+      position: relative;
+      background: var(--blue-deep);
+      background-image:
+        radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(70% 80% at 100% 100%, rgba(245,158,11,.10), transparent 60%),
+        linear-gradient(135deg, #355f85 0%, #2E5575 50%, #1c3e5b 100%);
+      color: #fff;
+      padding: 13px 42px 14px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 100% 7px;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 10px;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .brand-frame {
+      width: 26px; height: 26px;
+      border: 1px solid rgba(255,255,255,.7);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      color: #fff;
+      position: relative;
+    }
+    .brand-frame::after {
+      content: "";
+      position: absolute; inset: 2px;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .brand-mark {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: rgba(255,255,255,.7);
+      text-transform: uppercase;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 3px rgba(245,158,11,.18);
+    }
+    .hero-eyebrow .div {
+      width: 14px; height: 1px;
+      background: rgba(255,255,255,.4);
+    }
+    .hero-eyebrow strong { color: #fff; font-weight: 700; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .hero-statement {
+      font-family: "Montserrat", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.13;
+      letter-spacing: -.4px;
+      color: #fff;
+    }
+    .hero-statement .not {
+      color: var(--orange);
+      display: inline-block;
+    }
+    .hero-statement .small {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-top: 6px;
+      color: rgba(255,255,255,.8);
+    }
+    .hero-body p {
+      font-size: 10.2px;
+      line-height: 1.5;
+      color: rgba(255,255,255,.92);
+    }
+    .hero-body p + p { margin-top: 5px; }
+    .hero-body strong { color: #fff; font-weight: 600; }
+    .hero-body .punch {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 4px 8px;
+      background: rgba(245,158,11,.15);
+      border-left: 2px solid var(--orange);
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    /* ============ BODY CONTENT ============ */
+    .body-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .block {
+      padding: 4px 42px 4px;
+      position: relative;
+    }
+    .block.tinted { background: var(--gray-bg); }
+    .block.dark {
+      background: var(--blue-deep);
+      background-image: linear-gradient(135deg, #1c3e5b, #2E5575 55%, #34608a);
+      color: #fff;
+    }
+
+    /* Eyebrow row with editorial numbering */
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 3px;
+    }
+    .eyebrow-num {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      color: var(--blue-deep);
+      padding: 3px 6px 2px;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      background: #fff;
+      line-height: 1;
+    }
+    .eyebrow {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .eyebrow-bar {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line-strong), transparent);
+    }
+    .sec-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.18;
+      letter-spacing: -.3px;
+    }
+    .sec-title em {
+      font-style: normal;
+      color: var(--blue);
+    }
+    .sec-title .accent { color: var(--orange); font-style: normal; }
+
+    /* ============ SECTION 1 — THE SHIFT (3-stage flow) ============ */
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 16px 1fr 16px 1fr;
+      gap: 0;
+      margin-top: 5px;
+      align-items: stretch;
+    }
+    .flow-stage {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      padding: 7px 9px 8px;
+      box-shadow: 0 1px 0 rgba(20,30,45,.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .flow-stage .when {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .flow-stage .when::before {
+      content: "";
+      width: 12px; height: 1px;
+      background: var(--blue);
+    }
+    .flow-stage.next .when { color: var(--orange-deep); }
+    .flow-stage.next .when::before { background: var(--orange); }
+    .flow-stage h3 {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.18;
+      margin-bottom: 3px;
+      letter-spacing: -.1px;
+    }
+    .flow-stage p {
+      font-size: 9px;
+      line-height: 1.35;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .flow-stage .examples {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+    .flow-stage .examples li {
+      font-size: 8.5px;
+      font-weight: 500;
+      color: var(--blue-deep);
+      background: var(--blue-soft);
+      padding: 2px 6px;
+      border-radius: 3px;
+      line-height: 1.3;
+    }
+    .flow-stage.next .examples li {
+      color: var(--orange-deep);
+      background: var(--orange-soft);
+    }
+    .flow-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange);
+    }
+    .flow-arrow svg { width: 14px; height: 14px; stroke: var(--orange); }
+
+    /* ============ SECTION 2 — THE 2026 REALITY (3 stat cards) ============ */
+    .reality {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 4px;
+    }
+    .pillar {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      padding: 7px 11px 8px;
+      position: relative;
+      box-shadow: 0 1px 0 rgba(20,30,45,.02);
+      overflow: hidden;
+    }
+    .pillar::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--blue);
+    }
+    .pillar.warn::before { background: var(--orange); }
+    .pillar-num {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      letter-spacing: -.5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .pillar.warn .pillar-num { color: var(--orange); }
+    .pillar h3 {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.22;
+      margin: 4px 0 5px;
+      letter-spacing: -.1px;
+    }
+    .pillar .stack {
+      display: flex; flex-direction: column;
+      gap: 0px;
+      font-size: 9.2px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .pillar .stack b {
+      display: block;
+      font-weight: 500;
+      color: var(--body);
+    }
+    .pillar .punch {
+      margin-top: 3px;
+      font-size: 9.2px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.28;
+    }
+
+    /* ============ SECTION 3 — THE REAL ROI ============ */
+    .roi-wrap {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 10px;
+      margin-top: 5px;
+      align-items: stretch;
+    }
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .icon-tile {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 5px 8px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: 0 1px 0 rgba(20,30,45,.02);
+    }
+    .icon-tile-head {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .icon-cap {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      background: var(--blue-soft);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex: 0 0 20px;
+    }
+    .icon-cap svg { width: 12px; height: 12px; stroke: var(--blue); }
+    .icon-tile h4 {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -.1px;
+    }
+    .icon-tile p {
+      font-size: 8.4px;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+    .pull-quote {
+      border-radius: 7px;
+      background: var(--blue-deep);
+      background-image: linear-gradient(155deg, #34608a, #1c3e5b);
+      color: #fff;
+      padding: 10px 12px 11px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(20, 50, 80, .18);
+    }
+    .pull-quote::before {
+      content: "\201C";
+      position: absolute;
+      top: -10px; right: 7px;
+      font-family: Georgia, serif;
+      font-size: 60px;
+      color: rgba(245,158,11,.32);
+      line-height: 1;
+      font-weight: 700;
+    }
+    .pull-quote .pq-label {
+      font-family: "Montserrat", sans-serif;
+      font-size: 7.2px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .pull-quote p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 10.5px;
+      line-height: 1.28;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -.1px;
+    }
+    .pull-quote p + p { margin-top: 4px; color: rgba(255,255,255,.85); font-size: 9.6px; font-weight: 400; }
+
+    /* ============ SECTION 4 — OPERATIONAL DEBT WARNING ============ */
+    .warn-panel {
+      margin-top: 3px;
+      border: 1px solid #f5d493;
+      border-left: 4px solid var(--orange);
+      background:
+        linear-gradient(180deg, #fff8e8, #fff3d6);
+      border-radius: 7px;
+      padding: 7px 12px 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .warn-panel-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .warn-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: inline-flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(245,158,11,.32);
+    }
+    .warn-icon svg { width: 17px; height: 17px; stroke: #fff; }
+    .warn-headline {
+      font-family: "Montserrat", sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #6b3e02;
+      letter-spacing: -.1px;
+      line-height: 1.15;
+      margin-bottom: 3px;
+    }
+    .warn-list {
+      list-style: none;
+      display: flex;
+      gap: 3px 10px;
+      flex-wrap: wrap;
+      font-size: 9.2px;
+      line-height: 1.32;
+      color: #6b3e02;
+    }
+    .warn-list li { position: relative; padding-left: 8px; }
+    .warn-list li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 6px;
+      width: 4px; height: 4px;
+      background: var(--orange-deep);
+      border-radius: 1px;
+    }
+    .warn-conclude {
+      font-family: "Montserrat", sans-serif;
+      font-size: 10.8px;
+      font-weight: 700;
+      color: #6b3e02;
+      letter-spacing: -.2px;
+      line-height: 1.18;
+      text-align: right;
+    }
+    .warn-conclude span { color: var(--orange-deep); }
+
+    /* ============ SECTION 5 — READINESS CHECK ============ */
+    .check-panel {
+      margin-top: 5px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .check-item {
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+      border-radius: 6px;
+      background: #fff;
+      padding: 6px 8px 7px;
+      box-shadow: 0 1px 0 rgba(20,30,45,.02);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .check-num {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      letter-spacing: -.5px;
+    }
+    .check-item p {
+      font-size: 9.1px;
+      line-height: 1.3;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .check-footer {
+      margin-top: 5px;
+      font-size: 9.1px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .check-footer strong { color: var(--ink); font-weight: 600; }
+
+    /* ============ SECTION 6 — PRINCIPLE STRIP ============ */
+    .principle {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.18);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .principle div {
+      background: var(--blue-deep);
+      background-image: linear-gradient(135deg, #1c3e5b, #2E5575 55%, #34608a);
+      padding: 6px 10px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .principle b {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+    .principle p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -.2px;
+    }
+
+    /* ============ CTA PANEL ============ */
+    .cta {
+      position: relative;
+      background:
+        linear-gradient(180deg, #fff, #fafbfc);
+      border-top: 1px solid var(--line);
+      padding: 9px 42px 10px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .cta-head .label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      color: var(--orange-deep);
+      text-transform: uppercase;
+    }
+    .cta-head h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -.3px;
+      margin: 2px 0 2px;
+    }
+    .cta-head p {
+      font-size: 9.5px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .cta-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 11px;
+      margin-top: 4px;
+    }
+    .cta-list li {
+      font-size: 9px;
+      line-height: 1.25;
+      color: var(--body);
+      display: flex; align-items: flex-start; gap: 5px;
+      position: relative;
+    }
+    .cta-list li svg { width: 10px; height: 10px; stroke: var(--orange); flex: 0 0 10px; margin-top: 2px; }
+    .cta-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.4) inset,
+        0 8px 18px rgba(245,158,11,.30),
+        0 2px 4px rgba(184,114,6,.22);
+      border: 1px solid #d88a04;
+      white-space: nowrap;
+    }
+    .cta-btn .arrow {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+    }
+    .cta-btn .arrow svg { width: 10px; height: 10px; stroke: #fff; }
+    .cta-tag {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .cta-foot {
+      text-align: right;
+    }
+    .cta-foot .brand {
+      font-family: "Montserrat", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--blue-deep);
+    }
+    .cta-foot .signoff {
+      font-family: "Montserrat", sans-serif;
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .cta-foot .signoff span { color: var(--orange-deep); }
+
+    /* ============ FOOTER STRIP ============ */
+    .footer-strip {
+      background: var(--blue-darker);
+      color: rgba(255,255,255,.7);
+      padding: 4px 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Montserrat", sans-serif;
+      font-size: 7px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .footer-strip span { color: var(--orange); }
+
+    /* ============ PRINT ============ */
+    @page { size: 8.5in 11in; margin: 0; }
+    @media print {
+      html, body { margin: 0; padding: 0; background: #fff; }
+      body { display: block; }
+      .sheet {
+        box-shadow: none;
+        width: 8.5in;
+        height: 11in;
+        margin: 0;
+        overflow: hidden;
+      }
+      .hero, .footer-strip, .block.tinted, .block.dark, .warn-panel,
+      .pull-quote, .principle div, .cta-btn {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 760px) {
+      body { padding: 0; background: #fff; }
+      .sheet { width: 100%; height: auto; box-shadow: none; }
+      .sheet::before, .sheet::after { display: none; }
+      .hero { padding: 22px 22px 22px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 14px; }
+      .block { padding: 16px 22px; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .reality { grid-template-columns: 1fr; }
+      .roi-wrap { grid-template-columns: 1fr; }
+      .roi-grid { grid-template-columns: 1fr 1fr; }
+      .warn-panel-grid { grid-template-columns: 1fr; }
+      .warn-conclude { text-align: left; }
+      .check-panel { grid-template-columns: 1fr 1fr; }
+      .principle { grid-template-columns: 1fr 1fr; }
+      .cta { grid-template-columns: 1fr; padding: 22px; }
+      .cta-action { align-items: flex-start; }
+      .cta-list { grid-template-columns: 1fr; }
+      .footer-strip { flex-direction: column; gap: 6px; padding: 14px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+
+    <!-- HERO + HEADER -->
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand-lockup">
+          <div class="brand-frame">F</div>
+          <div class="brand-mark">FYHR</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="dot"></span>
+          <span>Executive Brief</span>
+          <span class="div"></span>
+          <strong>AI Readiness 2026</strong>
+          <span class="div"></span>
+          <span>No. 02</span>
+        </div>
+      </div>
+      <div class="hero-grid">
+        <div class="hero-statement">
+          Most organizations think they&rsquo;re evaluating AI.
+          <span class="not"> They&rsquo;re not.</span>
+          <span class="small">They&rsquo;re evaluating software.</span>
+        </div>
+        <div class="hero-body">
+          <p>The real question is whether the business is <strong>ready for what happens</strong> when every employee suddenly has access to a researcher, analyst, coordinator, writer, and problem-solver that works on demand.</p>
+          <p>That is the shift &mdash; and it is moving faster than most leadership teams realize.</p>
+          <span class="punch">What changed. What matters. What to do before your team runs ahead of your systems.</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="body-area">
+
+      <!-- SECTION 1 — THE SHIFT -->
+      <section class="block tinted">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">01</div>
+          <div class="eyebrow">The Shift</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">From <em>Tool Testing</em> to <span class="accent">Team Systems.</span></h2>
+        <div class="flow">
+          <article class="flow-stage">
+            <div class="when">May</div>
+            <h3>Individual Experimentation</h3>
+            <p>Employees testing tools on their own.</p>
+            <ul class="examples">
+              <li>ChatGPT</li><li>Claude</li><li>Copilot</li><li>Perplexity</li><li>Gemini</li>
+            </ul>
+          </article>
+          <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <article class="flow-stage">
+            <div class="when">Now</div>
+            <h3>Team-Based AI Workflows</h3>
+            <p>Departments using AI to move work faster.</p>
+            <ul class="examples">
+              <li>Shared prompts</li><li>Knowledge libraries</li><li>Team workspaces</li><li>Internal playbooks</li><li>Workflow support</li>
+            </ul>
+          </article>
+          <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <article class="flow-stage next">
+            <div class="when">Next</div>
+            <h3>AI Operating Infrastructure</h3>
+            <p>Companies building governed, repeatable systems.</p>
+            <ul class="examples">
+              <li>Role-based training</li><li>Department use cases</li><li>Governance rules</li><li>Workflow automation</li><li>Human review points</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION 2 — THE 2026 REALITY -->
+      <section class="block">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">02</div>
+          <div class="eyebrow">The 2026 Reality</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <div class="reality">
+          <article class="pillar">
+            <div class="pillar-num">01</div>
+            <h3>Your employees are already using AI.</h3>
+            <div class="stack">
+              <b>Not officially.</b>
+              <b>Not consistently.</b>
+              <b>Not always safely.</b>
+            </div>
+            <div class="punch">But they are using it.</div>
+          </article>
+          <article class="pillar warn">
+            <div class="pillar-num">02</div>
+            <h3>The biggest AI risk is invisible use.</h3>
+            <p style="font-size:9.5px;line-height:1.4;color:var(--muted);margin-top:2px;">Shadow adoption already lives across email, browsers, and side accounts.</p>
+            <div class="punch">You cannot govern what you cannot see.</div>
+          </article>
+          <article class="pillar">
+            <div class="pillar-num">03</div>
+            <h3>AI does not fix broken processes.</h3>
+            <p style="font-size:9.5px;line-height:1.4;color:var(--muted);margin-top:2px;">It scales them.</p>
+            <div class="punch">Messy work gets faster. Clean systems get leverage.</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION 3 — THE REAL ROI -->
+      <section class="block tinted">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">03</div>
+          <div class="eyebrow">The Real ROI</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">The Return Is <em>Hiding in Plain Sight.</em></h2>
+        <div class="roi-wrap">
+          <div class="roi-grid">
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg></span>
+                <h4>Find</h4>
+              </div>
+              <p>Locate information across documents and tools.</p>
+            </div>
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 4 16v4h4L20 8z"/><path d="M14 6l4 4"/></svg></span>
+                <h4>Draft</h4>
+              </div>
+              <p>Emails, policies, reports, client communications.</p>
+            </div>
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M6 12h12M8 18h8"/></svg></span>
+                <h4>Summarize</h4>
+              </div>
+              <p>Meetings, notes, and updates into action.</p>
+            </div>
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="4" rx="1"/><rect x="4" y="11" width="16" height="4" rx="1"/><rect x="4" y="17" width="16" height="2" rx="1"/></svg></span>
+                <h4>Standardize</h4>
+              </div>
+              <p>Make recurring work consistent across teams.</p>
+            </div>
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v11H9l-4 4z"/><path d="m9 10 2 2 4-4"/></svg></span>
+                <h4>Answer</h4>
+              </div>
+              <p>Reduce repeated internal questions.</p>
+            </div>
+            <div class="icon-tile">
+              <div class="icon-tile-head">
+                <span class="icon-cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 17v-5M12 17V8M17 17v-7"/></svg></span>
+                <h4>Report</h4>
+              </div>
+              <p>Scattered updates into leadership insights.</p>
+            </div>
+          </div>
+          <aside class="pull-quote">
+            <div class="pq-label">Point of view</div>
+            <p>Most companies do not need an AI agent on day one. They need to stop losing hours to work AI can already support safely.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — OPERATIONAL DEBT -->
+      <section class="block">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">04</div>
+          <div class="eyebrow">The Problem Most Companies Miss</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <div class="warn-panel">
+          <div class="warn-panel-grid">
+            <span class="warn-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v5M12 18v.5"/></svg></span>
+            <div>
+              <div class="warn-headline">AI exposes operational debt.</div>
+              <ul class="warn-list">
+                <li>Messy onboarding scales to messy faster.</li>
+                <li>Outdated procedures surface outdated answers.</li>
+                <li>Inconsistent management decisions spread wider.</li>
+              </ul>
+            </div>
+            <div class="warn-conclude">The fix is not more software.<br><span>The fix is structure.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 — READINESS CHECK -->
+      <section class="block tinted">
+        <div class="eyebrow-row">
+          <div class="eyebrow-num">05</div>
+          <div class="eyebrow">The Readiness Check</div>
+          <div class="eyebrow-bar"></div>
+        </div>
+        <h2 class="sec-title">Before You Roll Out AI, <em>Answer These Five Questions.</em></h2>
+        <div class="check-panel">
+          <div class="check-item">
+            <div class="check-num">01</div>
+            <p>Where are employees already using AI?</p>
+          </div>
+          <div class="check-item">
+            <div class="check-num">02</div>
+            <p>Which tasks consume the most time every week?</p>
+          </div>
+          <div class="check-item">
+            <div class="check-num">03</div>
+            <p>Which decisions must stay human-led?</p>
+          </div>
+          <div class="check-item">
+            <div class="check-num">04</div>
+            <p>What information should never be entered into AI systems?</p>
+          </div>
+          <div class="check-item">
+            <div class="check-num">05</div>
+            <p>If AI usage doubled tomorrow, would governance be in place?</p>
+          </div>
+        </div>
+        <p class="check-footer">Hard to answer? <strong>You are exactly where most organizations are</strong> &mdash; and this is where risk begins.</p>
+      </section>
+
+      <!-- SECTION 6 — PRINCIPLE STRIP -->
+      <section class="block dark">
+        <div class="eyebrow-row" style="margin-bottom:6px;">
+          <div class="eyebrow-num" style="background:transparent;border-color:rgba(255,255,255,.4);color:#fff;">06</div>
+          <div class="eyebrow" style="color:var(--orange);">The FYHR Point of View</div>
+          <div class="eyebrow-bar" style="background:linear-gradient(90deg,rgba(255,255,255,.4),transparent);"></div>
+        </div>
+        <div class="principle">
+          <div><b>01</b><p>AI accelerates work.</p></div>
+          <div><b>02</b><p>Humans remain accountable.</p></div>
+          <div><b>03</b><p>Speed without control creates risk.</p></div>
+          <div><b>04</b><p>If it cannot be defended, it should not be deployed.</p></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- CTA PANEL -->
+    <section class="cta">
+      <div class="cta-head">
+        <div class="label">Start Here</div>
+        <h2>Start with an AI Opportunity Assessment.</h2>
+        <p>In 60 minutes, we identify what is already moving, what is at risk, and where the first wins live.</p>
+        <ul class="cta-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Where AI is already being used</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hidden risks &amp; compliance concerns</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>High-impact opportunities by department</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Quick wins that save time immediately</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>A practical adoption roadmap</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Clarity before you buy another tool</li>
+        </ul>
+      </div>
+      <div class="cta-action">
+        <a class="cta-btn" href="#">
+          Book the 60-Minute Assessment
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <div class="cta-foot">
+          <div class="brand">FYHR</div>
+          <div class="signoff">Enterprise HR Firepower for SMBs <span>·</span> Fix HR. Fast.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER STRIP -->
+    <footer class="footer-strip">
+      <div>FYHR <span>·</span> Confidential <span>·</span> Executive Brief No. 02</div>
+      <div>AI Readiness 2026</div>
+    </footer>
+
+  </main>
+</body>
+</html>
